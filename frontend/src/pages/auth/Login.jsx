@@ -15,16 +15,16 @@ export default function Login() {
                     <form className="flex flex-col gap-5">
                         <div>
                             <label
-                                htmlFor="email"
+                                htmlFor="name"
                                 className="block text-sm text-accent tracking-widest mb-2 text-center"
                             >
-                                Correo electrónico
+                                Usuario
                             </label>
                             <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                placeholder="usuario@ikus.com"
+                                type="text"
+                                id="name"
+                                name="name"
+                                placeholder="Nombre de tu personaje"
                                 required
                                 autoFocus
                                 className="w-full px-4 py-3 rounded bg-dark border border-white/10 text-primary text-base placeholder:text-muted/30 focus:outline-none focus:border-accent/50 transition-all duration-300"
