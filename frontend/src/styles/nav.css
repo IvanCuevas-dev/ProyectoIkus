@@ -1,0 +1,18 @@
+/* Menú móvil */
+
+.mobile-menu {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    visibility: hidden;
+    transition:
+        max-height 0.3s ease,
+        opacity 0.2s ease,
+        visibility 0.2s;
+}
+
+.mobile-menu.menu-open {
+    max-height: 500px;
+    opacity: 1;
+    visibility: visible;
+}

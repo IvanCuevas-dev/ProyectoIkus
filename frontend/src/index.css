@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import 'tailwindcss';
+@import './styles/animations.css';
+@import './styles/hero.css';
+@import './styles/nav.css';
+
+@theme {
+    --color-dark: #141824;
+    --color-darker: #2a2f42;
+    --color-primary: #e6e6e6;
+    --color-muted: #b5b5b5;
+    --color-accent: #cab263;
+
+    --font-sans: 'Philosopher', serif;
+    --font-display: 'Cinzel Decorative', serif;
+}
