@@ -4,6 +4,7 @@ import Footer from './components/Footer'
 import Home from './pages/public/Home'
 import Login from './pages/auth/Login'
 import Registro from './pages/auth/Registro'
+import { AuthProvider } from './context/AuthContext'
 
 function Layout({ children }) {
     return (
@@ -17,14 +18,16 @@ function Layout({ children }) {
 
 export default function App() {
     return (
-        <BrowserRouter>
-            <Layout>
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/registro" element={<Registro />} />
-                </Routes>
-            </Layout>
-        </BrowserRouter>
+        <AuthProvider>
+            <BrowserRouter>
+                <Layout>
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/registro" element={<Registro />} />
+                    </Routes>
+                </Layout>
+            </BrowserRouter>
+        </AuthProvider>
     )
 }

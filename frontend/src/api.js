@@ -5,18 +5,18 @@ let api = axios.create({
     headers: { Accept: 'application/json' },
 })
 
-// Adjunta el token Bearer en cada petición si existe
+// Añade el token en cada petición si existe
 api.interceptors.request.use((config) => {
     let token = localStorage.getItem('token')
     if (token) config.headers.Authorization = `Bearer ${token}`
     return config
 })
 
-// Redirige al login si el backend devuelve 401
+//  Redirige al login si el token es inválido
 api.interceptors.response.use(
     (response) => response,
     (error) => {
-        if (error.response?.status === 401) {
+        if (error.response?.status === 401 && window.location.pathname !== '/login') {
             localStorage.removeItem('token')
             window.location.href = '/login'
         }
