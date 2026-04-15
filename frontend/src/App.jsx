@@ -30,6 +30,7 @@ function PrivateLayout({ children }) {
                 <Sidebar />
                 <main className="flex-1 md:ml-52 p-8">{children}</main>
             </div>
+            <Footer />
         </div>
     )
 }

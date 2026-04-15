@@ -13,13 +13,13 @@ export default function Sidebar() {
     ]
 
     return (
-        <aside className="hidden md:flex fixed top-16 left-0 h-[calc(100vh-4rem)] w-52 bg-darker border-r border-white/10 flex-col py-6 px-4 gap-6 rounded-r-xl overflow-y-auto">
+        <aside className="hidden md:flex fixed top-16 left-0 bottom-14 w-52 z-10 flex-col py-6 px-4 gap-6 rounded-r-xl overflow-y-auto border-r border-accent/20 shadow-[inset_-1px_0_30px_rgba(0,0,0,0.4)] bg-[linear-gradient(180deg,#0f1320_0%,#1e2440_50%,#0d1018_100%)]">
             {/* Usuario */}
             <Link to="/profile" className="flex flex-col items-center gap-2 no-underline group">
-                <div className="w-12 h-12 rounded-full bg-accent/20 border border-accent/40 flex items-center justify-center cursor-pointer group-hover:border-accent transition-colors">
-                    <span className="text-accent font-bold text-lg">{user?.name?.[0]?.toUpperCase()}</span>
+                <div className="w-12 h-12 rounded-full bg-accent/20 border border-accent/40 flex items-center justify-center group-hover:border-accent transition-colors">
+                    <span className="text-accent uppercase font-bold text-xl font-display">{user?.name?.[0]?.toUpperCase()}</span>
                 </div>
-                <span className="text-primary font-bold tracking-wider text-sm group-hover:text-accent transition-colors">
+                <span className="font-bold tracking-wider text-sm group-hover:text-accent transition-colors font-display">
                     {user?.name}
                 </span>
             </Link>
@@ -34,7 +34,7 @@ export default function Sidebar() {
                             ${
                                 location.pathname === link.to
                                     ? 'bg-accent/10 text-accent font-bold border-r-2 border-accent'
-                                    : 'text-muted hover:text-primary hover:bg-white/5'
+                                    : 'hover:text-primary hover:bg-white/5'
                             }`}
                     >
                         {link.label}

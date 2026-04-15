@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import api from '../../api'
 
-let XP_PER_LEVEL = 100
+//XP necesaria por nivel
+let XP_PER_LEVEL = 3000
 
+//Barra de progreso con etiqueta y valor
 function StatBar({ label, value, max, color = 'bg-accent' }) {
     let pct = Math.min(100, Math.round((value / max) * 100))
     return (
@@ -21,6 +23,7 @@ function StatBar({ label, value, max, color = 'bg-accent' }) {
     )
 }
 
+//Tarjeta de estadística individual
 function StatCard({ label, value }) {
     return (
         <div className="flex flex-col items-center gap-1 bg-dark border border-white/10 rounded-lg py-3 px-4">
@@ -35,6 +38,7 @@ export default function Profile() {
     let [loading, setLoading] = useState(true)
     let [error, setError] = useState(null)
 
+    //Carga el personaje del usuario autenticado
     useEffect(() => {
         api.get('/character')
             .then((res) => setCharacter(res.data))
@@ -42,24 +46,27 @@ export default function Profile() {
             .finally(() => setLoading(false))
     }, [])
 
+    //Mensaje mientras carga
     if (loading) {
-        return <div className="flex items-center justify-center h-64 text-muted text-sm">Cargando personaje...</div>
+        return <div className="flex items-center justify-center h-64 text-sm animate-pulse">Cargando personaje...</div>
     }
 
+    //Si falla la API muestro error para que no rompa
     if (error || !character) {
         return (
-            <div className="flex items-center justify-center h-64 text-muted text-sm">
-                {error ?? 'Sin personaje asignado.'}
+            <div className="flex items-center justify-center h-64 text-sm">
+                {error ?? 'Error al cargar el personaje.'}
             </div>
         )
     }
 
+    //Calcula XP para el siguiente nivel y progreso actual
     let xpForNext = character.level * XP_PER_LEVEL
     let xpProgress = character.experience % XP_PER_LEVEL
 
     return (
         <div className="flex flex-col gap-6 max-w-2xl mx-auto py-6 px-4">
-            {/* Cabecera */}
+            {/* Usuario */}
             <div className="flex items-center gap-5 bg-darker border border-white/10 rounded-xl p-5">
                 <div className="w-20 h-20 rounded-full bg-accent/20 border-2 border-accent/50 flex items-center justify-center shrink-0">
                     <span className="text-accent font-bold text-3xl font-display">
@@ -83,7 +90,7 @@ export default function Profile() {
                     Progresión
                 </h2>
                 <StatBar
-                    label={`Experiencia — próximo nivel: ${xpForNext - xpProgress} XP`}
+                    label={`Experiencia — Próximo nivel: ${xpForNext - xpProgress} XP`}
                     value={xpProgress}
                     max={XP_PER_LEVEL}
                     color="bg-accent"
@@ -95,11 +102,10 @@ export default function Profile() {
                 <h2 className="text-primary font-bold text-sm uppercase tracking-widest border-b border-white/10 pb-2">
                     Estadísticas
                 </h2>
-                <div className="grid grid-cols-4 gap-3">
+                <div className="grid grid-cols-3 gap-3">
                     <StatCard label="HP" value={character.health} />
                     <StatCard label="Ataque" value={character.attack} />
                     <StatCard label="Defensa" value={character.defense} />
-                    <StatCard label="Nivel" value={character.level} />
                 </div>
             </div>
         </div>

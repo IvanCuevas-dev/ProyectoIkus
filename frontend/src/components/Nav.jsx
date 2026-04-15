@@ -22,9 +22,12 @@ export default function Nav() {
     return (
         <header>
             {/* Overlay */}
-            <div className={`menu-overlay ${menuOpen ? 'menu-open' : ''}`} onClick={() => setMenuOpen(false)} />
+            <div
+                className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 ${menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+                onClick={() => setMenuOpen(false)}
+            />
 
-            <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-darker/70 border-b border-white/10 shadow-2xl transition-all duration-300">
+            <nav className="fixed top-0 inset-x-0 z-50 backdrop-blur-xl bg-[linear-gradient(180deg,#1e2438_0%,#252a42_50%,#1e2438_100%)] border-b border-accent/20 shadow-[0_4px_24px_rgba(0,0,0,0.5),0_1px_0_rgba(202,178,99,0.08)]">
                 <div className="mx-auto flex items-center justify-between h-16 px-10">
                     {/* Logo + nombre */}
                     <Link to="/" className="flex items-center gap-2 no-underline">
@@ -53,7 +56,7 @@ export default function Nav() {
                             </button>
                         </div>
                     ) : (
-                        <ul className="hidden md:flex items-center gap-4 list-none m-0">
+                        <ul className="hidden md:flex items-center gap-4">
                             <li>
                                 <Link to="/login" className="px-3 py-2 hover:text-accent transition-colors">
                                     Login
@@ -72,7 +75,7 @@ export default function Nav() {
 
                     {/* Botón hamburguesa */}
                     <button
-                        className="md:hidden p-2 rounded text-primary focus:outline-none cursor-pointer"
+                        className="md:hidden p-2 rounded text-primary cursor-pointer"
                         onClick={() => setMenuOpen(!menuOpen)}
                     >
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -87,28 +90,32 @@ export default function Nav() {
                 </div>
 
                 {/* Menú móvil */}
-                <div className={`mobile-menu md:hidden ${menuOpen ? 'menu-open' : ''}`}>
+                <div
+                    className={`fixed top-0 right-0 h-screen w-[75vw] max-w-75 z-50 overflow-y-auto transition-transform duration-300 md:hidden bg-[linear-gradient(180deg,#0f1320_0%,#1e2440_50%,#0d1018_100%)] border-l border-accent/20 ${menuOpen ? 'translate-x-0' : 'translate-x-full'}`}
+                >
                     <div className="px-6 py-8 flex flex-col gap-2">
                         {token ? (
                             <>
                                 {/* Avatar + nombre */}
                                 <Link
                                     to="/profile"
-                                    className="flex flex-col items-center gap-2 mb-4 no-underline cursor-pointer"
+                                    className="flex flex-col items-center gap-2 mb-4 no-underline"
                                     onClick={() => setMenuOpen(false)}
                                 >
                                     <div className="w-12 h-12 rounded-full bg-accent/20 border border-accent/40 flex items-center justify-center hover:border-accent transition-colors">
-                                        <span className="text-accent font-bold text-lg">
+                                        <span className="text-accent font-bold text-lg font-display">
                                             {user?.name?.[0]?.toUpperCase()}
                                         </span>
                                     </div>
-                                    <span className="text-primary font-bold tracking-wider text-sm">{user?.name}</span>
+                                    <span className="text-primary font-bold tracking-wider text-sm font-display">
+                                        {user?.name}
+                                    </span>
                                 </Link>
 
                                 {/* Separador */}
-                                <div className="h-px bg-accent/40 mb-2" />
+                                <div className="h-px bg-accent/40 my-2" />
 
-                                {/* Links */}
+                                {/* Links con login */}
                                 {links.map((link) => (
                                     <Link
                                         key={link.to}
@@ -117,7 +124,7 @@ export default function Nav() {
                                             ${
                                                 location.pathname === link.to
                                                     ? 'text-accent font-bold border-r-2 border-accent bg-accent/10'
-                                                    : 'text-muted hover:text-primary hover:bg-white/5'
+                                                    : 'hover:text-primary hover:bg-white/5'
                                             }`}
                                         onClick={() => setMenuOpen(false)}
                                     >
@@ -126,20 +133,21 @@ export default function Nav() {
                                 ))}
 
                                 {/* Separador */}
-                                <div className="h-px bg-accent/40 mt-2 mb-2" />
+                                <div className="h-px bg-accent/40 my-2" />
 
                                 <button
                                     onClick={() => {
                                         handleLogout()
                                         setMenuOpen(false)
                                     }}
-                                    className="py-2 px-3 text-muted hover:text-primary hover:bg-white/5 text-left text-sm rounded cursor-pointer transition-colors"
+                                    className="py-2 px-3 hover:text-primary hover:bg-white/5 text-left text-sm rounded cursor-pointer transition-colors"
                                 >
                                     Logout
                                 </button>
                             </>
                         ) : (
                             <>
+                                {/* Links sin login */}
                                 <Link
                                     to="/login"
                                     className="py-2 text-primary hover:text-accent no-underline transition-colors"
