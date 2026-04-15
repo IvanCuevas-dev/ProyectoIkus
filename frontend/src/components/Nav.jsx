@@ -22,6 +22,9 @@ export default function Nav() {
 
     return (
         <header>
+            {/* Overlay */}
+            <div className={`menu-overlay ${menuOpen ? 'menu-open' : ''}`} onClick={() => setMenuOpen(false)} />
+
             <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-darker/70 border-b border-white/10 shadow-2xl transition-all duration-300">
                 <div className="mx-auto flex items-center justify-between h-16 px-10">
                     {/* Logo + nombre */}
@@ -35,12 +38,14 @@ export default function Nav() {
                     {/* Desktop */}
                     {token ? (
                         <div className="hidden md:flex items-center gap-4">
-                            <Link
-                                to="/dashboard"
-                                className="px-3 py-2 hover:text-accent transition-colors no-underline"
-                            >
-                                Inicio
-                            </Link>
+                            {location.pathname === '/' && (
+                                <Link
+                                    to="/dashboard"
+                                    className="px-3 py-2 hover:text-accent transition-colors no-underline"
+                                >
+                                    Inicio
+                                </Link>
+                            )}
                             <button
                                 onClick={handleLogout}
                                 className="px-3 py-2 hover:text-accent transition-colors cursor-pointer"
@@ -83,29 +88,53 @@ export default function Nav() {
                 </div>
 
                 {/* Menú móvil */}
-                <div
-                    className={`mobile-menu md:hidden bg-transparent border-t border-white/10 backdrop-blur-xl ${menuOpen ? 'menu-open' : ''}`}
-                >
-                    <div className="px-6 py-4 flex flex-col gap-2">
+                <div className={`mobile-menu md:hidden ${menuOpen ? 'menu-open' : ''}`}>
+                    <div className="px-6 py-8 flex flex-col gap-2">
                         {token ? (
                             <>
-                                <span className="py-2 text-accent font-bold tracking-wider">{user?.name}</span>
+                                {/* Avatar + nombre */}
+                                <Link
+                                    to="/profile"
+                                    className="flex flex-col items-center gap-2 mb-4 no-underline cursor-pointer"
+                                    onClick={() => setMenuOpen(false)}
+                                >
+                                    <div className="w-12 h-12 rounded-full bg-accent/20 border border-accent/40 flex items-center justify-center hover:border-accent transition-colors">
+                                        <span className="text-accent font-bold text-lg">
+                                            {user?.name?.[0]?.toUpperCase()}
+                                        </span>
+                                    </div>
+                                    <span className="text-primary font-bold tracking-wider text-sm">{user?.name}</span>
+                                </Link>
+
+                                {/* Separador */}
+                                <div className="h-px bg-accent/40 mb-2" />
+
+                                {/* Links */}
                                 {links.map((link) => (
                                     <Link
                                         key={link.to}
                                         to={link.to}
-                                        className={`py-2 no-underline transition-colors ${location.pathname === link.to ? 'text-accent font-bold' : 'text-primary hover:text-accent'}`}
+                                        className={`py-2 px-3 rounded no-underline transition-colors text-sm
+                                            ${
+                                                location.pathname === link.to
+                                                    ? 'text-accent font-bold border-r-2 border-accent bg-accent/10'
+                                                    : 'text-muted hover:text-primary hover:bg-white/5'
+                                            }`}
                                         onClick={() => setMenuOpen(false)}
                                     >
                                         {link.label}
                                     </Link>
                                 ))}
+
+                                {/* Separador */}
+                                <div className="h-px bg-accent/40 mt-2 mb-2" />
+
                                 <button
                                     onClick={() => {
                                         handleLogout()
                                         setMenuOpen(false)
                                     }}
-                                    className="py-2 text-primary hover:text-accent text-left cursor-pointer"
+                                    className="py-2 px-3 text-muted hover:text-primary hover:bg-white/5 text-left text-sm rounded cursor-pointer transition-colors"
                                 >
                                     Logout
                                 </button>

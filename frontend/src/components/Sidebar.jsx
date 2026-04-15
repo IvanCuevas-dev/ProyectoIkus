@@ -14,14 +14,16 @@ export default function Sidebar() {
     ]
 
     return (
-        <aside className="hidden md:flex fixed top-16 left-0 h-[calc(100vh-4rem)] w-52 bg-darker border-r border-white/10 flex-col py-6 px-4 gap-6 rounded-xl overflow-y-auto">
+        <aside className="hidden md:flex fixed top-16 left-0 h-[calc(100vh-4rem)] w-52 bg-darker border-r border-white/10 flex-col py-6 px-4 gap-6 rounded-r-xl overflow-y-auto">
             {/* Usuario */}
-            <div className="flex flex-col items-center gap-2">
-                <div className="w-12 h-12 rounded-full bg-accent/20 border border-accent/40 flex items-center justify-center">
+            <Link to="/profile" className="flex flex-col items-center gap-2 no-underline group">
+                <div className="w-12 h-12 rounded-full bg-accent/20 border border-accent/40 flex items-center justify-center cursor-pointer group-hover:border-accent transition-colors">
                     <span className="text-accent font-bold text-lg">{user?.name?.[0]?.toUpperCase()}</span>
                 </div>
-                <span className="text-primary font-bold tracking-wider text-sm">{user?.name}</span>
-            </div>
+                <span className="text-primary font-bold tracking-wider text-sm group-hover:text-accent transition-colors">
+                    {user?.name}
+                </span>
+            </Link>
 
             {/* Links */}
             <nav className="flex flex-col gap-1">
