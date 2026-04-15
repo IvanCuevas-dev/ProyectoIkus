@@ -11,22 +11,13 @@ export default function Nav() {
                     {/* Logo + nombre */}
                     <Link to="/" className="flex items-center gap-2 no-underline">
                         <img src="/img/ui/Logo.png" alt="Logo IKUS" className="w-10 h-10 object-contain" />
-                        <span className="font-display font-bold text-xl text-primary tracking-wider">PROYECTO IKUS</span>
+                        <span className="font-display font-bold text-xl text-primary tracking-wider">
+                            PROYECTO IKUS
+                        </span>
                     </Link>
 
                     {/* Rutas desktop */}
                     <ul className="hidden md:flex items-center gap-4 list-none m-0">
-                        <li>
-                            <Link to="/" className="px-3 py-2 hover:text-accent transition-colors">
-                                Inicio
-                            </Link>
-                        </li>
-                        <li>
-                            <a href="#" className="px-3 py-2 hover:text-accent transition-colors">
-                                Contacto
-                            </a>
-                        </li>
-                        <li className="text-white/20 mx-2 select-none">|</li>
                         <li>
                             <Link to="/login" className="px-3 py-2 hover:text-accent transition-colors">
                                 Login
@@ -45,7 +36,6 @@ export default function Nav() {
                     {/* Botón hamburguesa */}
                     <button
                         className="md:hidden p-2 rounded text-primary focus:outline-none"
-                        aria-label="Abrir menú"
                         onClick={() => setMenuOpen(!menuOpen)}
                     >
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -64,17 +54,6 @@ export default function Nav() {
                     className={`mobile-menu md:hidden bg-transparent border-t border-white/10 backdrop-blur-xl ${menuOpen ? 'menu-open' : ''}`}
                 >
                     <div className="px-6 py-4 flex flex-col gap-2">
-                        <Link
-                            to="/"
-                            className="py-2 text-primary hover:text-accent no-underline transition-colors"
-                            onClick={() => setMenuOpen(false)}
-                        >
-                            Inicio
-                        </Link>
-                        <a href="#" className="py-2 text-primary hover:text-accent no-underline transition-colors">
-                            Contacto
-                        </a>
-                        <hr className="border-white/10 my-1" />
                         <Link
                             to="/login"
                             className="py-2 text-primary hover:text-accent no-underline transition-colors"
