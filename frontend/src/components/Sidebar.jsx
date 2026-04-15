@@ -7,7 +7,6 @@ export default function Sidebar() {
     let location = useLocation()
 
     let links = [
-        { to: '/dashboard', label: 'Inicio' },
         { to: '/work', label: 'Trabajar' },
         { to: '/shop', label: 'Mercader' },
         { to: '/ranking', label: 'Clasificación' },

@@ -9,7 +9,6 @@ export default function Nav() {
     let location = useLocation()
 
     let links = [
-        { to: '/dashboard', label: 'Inicio' },
         { to: '/work', label: 'Trabajar' },
         { to: '/shop', label: 'Mercader' },
         { to: '/ranking', label: 'Clasificación' },
@@ -40,10 +39,10 @@ export default function Nav() {
                         <div className="hidden md:flex items-center gap-4">
                             {location.pathname === '/' && (
                                 <Link
-                                    to="/dashboard"
+                                    to="/profile"
                                     className="px-3 py-2 hover:text-accent transition-colors no-underline"
                                 >
-                                    Inicio
+                                    Perfil
                                 </Link>
                             )}
                             <button

@@ -14,7 +14,7 @@ export default function Login() {
         e.preventDefault()
         try {
             await login({ name, password })
-            navigate('/dashboard')
+            navigate('/profile')
         } catch (err) {
             setError('Credenciales incorrectas')
         }

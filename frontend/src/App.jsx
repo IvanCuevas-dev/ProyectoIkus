@@ -7,7 +7,6 @@ import Login from './pages/auth/Login'
 import Registro from './pages/auth/Registro'
 import { AuthProvider } from './context/AuthContext'
 import PrivateRoute from './components/PrivateRoute'
-import Dashboard from './pages/private/Dashboard'
 import Shop from './pages/private/Shop'
 import Ranking from './pages/private/Ranking'
 import Work from './pages/private/Work'
@@ -62,16 +61,6 @@ export default function App() {
                             <PublicLayout>
                                 <Registro />
                             </PublicLayout>
-                        }
-                    />
-                    <Route
-                        path="/dashboard"
-                        element={
-                            <PrivateRoute>
-                                <PrivateLayout>
-                                    <Dashboard />
-                                </PrivateLayout>
-                            </PrivateRoute>
                         }
                     />
                     <Route

@@ -14,7 +14,7 @@ export default function Registro() {
         e.preventDefault()
         try {
             await register({ name, email, password })
-            navigate('/dashboard')
+            navigate('/profile')
         } catch (err) {
             let errors = err.response?.data?.errors
             if (errors?.name) {
