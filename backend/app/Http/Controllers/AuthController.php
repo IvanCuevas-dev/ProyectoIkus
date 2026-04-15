@@ -6,6 +6,7 @@ use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Character;
 
 
 class AuthController extends Controller
@@ -18,6 +19,12 @@ class AuthController extends Controller
             'name'     => $request->name,
             'email'    => $request->email,
             'password' => $request->password,
+        ]);
+
+        //Crear personaje vinculado al usuario
+        Character::create([
+            'user_id' => $user->id,
+            'name'    => $user->name,
         ]);
 
         //Generar token
