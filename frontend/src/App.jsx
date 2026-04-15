@@ -14,7 +14,7 @@ import Profile from './pages/private/Profile'
 
 function PublicLayout({ children }) {
     return (
-        <div className="bg-dark text-primary flex flex-col min-h-screen">
+        <div className="text-primary flex flex-col min-h-screen">
             <Nav />
             <div className="flex-1 flex flex-col pt-16">{children}</div>
             <Footer />
@@ -24,7 +24,7 @@ function PublicLayout({ children }) {
 
 function PrivateLayout({ children }) {
     return (
-        <div className="bg-dark text-primary flex flex-col min-h-screen">
+        <div className="text-primary flex flex-col min-h-screen">
             <Nav />
             <div className="flex flex-1 pt-16">
                 <Sidebar />

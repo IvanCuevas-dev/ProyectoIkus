@@ -17,6 +17,8 @@ class Character extends Model
         'health',
         'attack',
         'defense',
+        'work_started_at',
+        'work_ends_at',
     ];
 
     public function user()

@@ -24,6 +24,9 @@ export default function Sidebar() {
                 </span>
             </Link>
 
+            {/* Divisor */}
+            <div className="h-px bg-accent/20" />
+
             {/* Links */}
             <nav className="flex flex-col gap-1">
                 {links.map((link) => (

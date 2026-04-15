@@ -27,7 +27,7 @@ export default function Nav() {
                 onClick={() => setMenuOpen(false)}
             />
 
-            <nav className="fixed top-0 inset-x-0 z-50 backdrop-blur-xl bg-[linear-gradient(180deg,#1e2438_0%,#252a42_50%,#1e2438_100%)] border-b border-accent/20 shadow-[0_4px_24px_rgba(0,0,0,0.5),0_1px_0_rgba(202,178,99,0.08)]">
+            <nav className="fixed top-0 inset-x-0 z-50 backdrop-blur-xl bg-[linear-gradient(180deg,#0f1320_0%,#1e2440_50%,#0d1018_100%)] border-b border-accent/20 shadow-[0_4px_24px_rgba(0,0,0,0.5),0_1px_0_rgba(202,178,99,0.08)]">
                 <div className="mx-auto flex items-center justify-between h-16 px-10">
                     {/* Logo + nombre */}
                     <Link to="/" className="flex items-center gap-2 no-underline">

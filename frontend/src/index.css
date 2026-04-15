@@ -14,6 +14,12 @@
     --font-display: 'Cinzel Decorative', serif;
 }
 
+/* Fondo global */
+body {
+    background: linear-gradient(160deg, #1a2035 0%, #141824 40%, #192030 70%, #141824 100%);
+    min-height: 100vh;
+}
+
 /* Barra de scroll */
 ::-webkit-scrollbar {
     width: 6px;

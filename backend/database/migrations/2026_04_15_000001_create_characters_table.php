@@ -18,6 +18,8 @@ return new class extends Migration
             $table->integer('health')->default(100);
             $table->integer('attack')->default(10);
             $table->integer('defense')->default(5);
+            $table->timestamp('work_started_at')->nullable();
+            $table->timestamp('work_ends_at')->nullable();
             $table->timestamp('created_at')->useCurrent();
         });
     }

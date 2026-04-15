@@ -4,25 +4,6 @@ import api from '../../api'
 //XP necesaria por nivel
 let XP_PER_LEVEL = 3000
 
-//Barra de progreso con etiqueta y valor
-function StatBar({ label, value, max, color = 'bg-accent' }) {
-    let pct = Math.min(100, Math.round((value / max) * 100))
-    return (
-        <div className="flex flex-col gap-1">
-            <div className="flex justify-between text-xs text-muted">
-                <span>{label}</span>
-                <span className="text-primary font-bold">
-                    {value}
-                    {max !== value ? ` / ${max}` : ''}
-                </span>
-            </div>
-            <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-                <div className={`h-full ${color} rounded-full transition-all`} style={{ width: `${pct}%` }} />
-            </div>
-        </div>
-    )
-}
-
 //Tarjeta de estadística individual
 function StatCard({ label, value }) {
     return (
@@ -63,6 +44,7 @@ export default function Profile() {
     //Calcula XP para el siguiente nivel y progreso actual
     let xpForNext = character.level * XP_PER_LEVEL
     let xpProgress = character.experience % XP_PER_LEVEL
+    let xpPct = Math.min(100, Math.round((xpProgress / XP_PER_LEVEL) * 100))
 
     return (
         <div className="flex flex-col gap-6 max-w-2xl mx-auto py-6 px-4">
@@ -74,12 +56,24 @@ export default function Profile() {
                     </span>
                 </div>
                 <div className="flex flex-col gap-1">
+                    {/* Nombre */}
                     <h1 className="text-primary font-bold text-2xl font-display tracking-wide">{character.name}</h1>
+                    {/* Nivel */}
                     <span className="text-accent text-sm font-bold tracking-widest uppercase">
                         Nivel {character.level}
                     </span>
-                    <span className="text-muted text-xs">
-                        Oro: <span className="text-accent font-bold">{character.gold.toLocaleString()}</span> ⚜
+                    {/* SVG + Oro */}
+                    <span className="flex items-center gap-1 text-xs">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" className="w-4 h-4">
+                            <ellipse cx="13" cy="13" rx="5" ry="3" fill="#b45309" />
+                            <rect x="8" y="10" width="10" height="3" fill="#b45309" rx="1" />
+                            <ellipse cx="13" cy="10" rx="5" ry="3" fill="#f59e0b" />
+                            <ellipse cx="7" cy="11" rx="5" ry="3" fill="#92400e" />
+                            <rect x="2" y="8" width="10" height="3" fill="#92400e" rx="1" />
+                            <ellipse cx="7" cy="8" rx="5" ry="3" fill="#fbbf24" />
+                            <ellipse cx="7" cy="8" rx="3" ry="1.5" fill="#fde68a" opacity="0.6" />
+                        </svg>
+                        <span className="text-accent font-bold">{character.gold}</span>
                     </span>
                 </div>
             </div>
@@ -89,12 +83,18 @@ export default function Profile() {
                 <h2 className="text-primary font-bold text-sm uppercase tracking-widest border-b border-white/10 pb-2">
                     Progresión
                 </h2>
-                <StatBar
-                    label={`Experiencia — Próximo nivel: ${xpForNext - xpProgress} XP`}
-                    value={xpProgress}
-                    max={XP_PER_LEVEL}
-                    color="bg-accent"
-                />
+                {/* Barra de experiencia */}
+                <div className="flex flex-col gap-1">
+                    <div className="flex justify-between text-xs text-muted">
+                        <span>Experiencia — Próximo nivel: {xpForNext - xpProgress} XP</span>
+                        <span className="text-primary font-bold">
+                            {xpProgress} / {XP_PER_LEVEL}
+                        </span>
+                    </div>
+                    <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+                        <div className="h-full bg-accent rounded-full transition-all" style={{ width: `${xpPct}%` }} />
+                    </div>
+                </div>
             </div>
 
             {/* Stats base */}
