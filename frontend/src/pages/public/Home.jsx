@@ -95,7 +95,7 @@ export default function Home() {
                         <button
                             key={i}
                             onClick={() => goTo(i)}
-                            className={`w-2 h-2 rounded-full border border-white/20 transition-all ${i === currentSlide ? 'bg-white scale-110' : 'bg-white/40'}`}
+                            className={`cursor-pointer w-2 h-2 rounded-full border border-white/20 transition-all ${i === currentSlide ? 'bg-white scale-110' : 'bg-white/40'}`}
                         />
                     ))}
                 </div>
@@ -103,15 +103,15 @@ export default function Home() {
                 {/* Flechas */}
                 <button
                     onClick={prev}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-black/20 hover:bg-black/50 text-white transition-all"
+                    className="cursor-pointer absolute left-4 top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-black/20 hover:bg-black/50 text-white transition-all"
                 >
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-6 h-6 " fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                     </svg>
                 </button>
                 <button
                     onClick={next}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-black/20 hover:bg-black/50 text-white transition-all"
+                    className="cursor-pointer absolute right-4 top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-black/20 hover:bg-black/50 text-white transition-all"
                 >
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

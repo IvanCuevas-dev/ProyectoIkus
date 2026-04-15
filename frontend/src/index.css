@@ -14,3 +14,22 @@
     --font-sans: 'Philosopher', serif;
     --font-display: 'Cinzel Decorative', serif;
 }
+
+/* Barra de scroll */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #141824;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cab263;
+    border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #e6c96e;
+    box-shadow: 0 0 8px rgba(202, 178, 99, 0.6);
+}

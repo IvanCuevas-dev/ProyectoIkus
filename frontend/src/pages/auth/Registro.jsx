@@ -108,7 +108,7 @@ export default function Registro() {
                         {/** Botón */}
                         <button
                             type="submit"
-                            className="w-full mt-2 py-3 font-bold tracking-widest border border-accent text-accent rounded-sm hover:bg-accent hover:text-black hover:shadow-[0_0_15px_rgba(202,178,99,0.3)] transition-all duration-300"
+                            className="cursor-pointer w-full mt-2 py-3 font-bold tracking-widest border border-accent text-accent rounded-sm hover:bg-accent hover:text-black hover:shadow-[0_0_15px_rgba(202,178,99,0.3)] transition-all duration-300"
                         >
                             CREAR CUENTA
                         </button>
