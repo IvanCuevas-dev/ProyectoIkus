@@ -5,7 +5,7 @@ let AuthContext = createContext()
 
 //Comparte estados globales con los demas componentes
 function AuthProvider({ children }) {
-    let [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
+    let [user, setUser] = useState(JSON.parse(localStorage.getItem('user') || 'null'))
     let [token, setToken] = useState(localStorage.getItem('token'))
 
     async function register(data) {

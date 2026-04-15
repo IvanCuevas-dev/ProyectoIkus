@@ -16,7 +16,7 @@ export default function Login() {
             await login({ name, password })
             navigate('/dashboard')
         } catch (err) {
-            setError(err.response?.data?.message || 'Credenciales incorrectas')
+            setError('Credenciales incorrectas')
         }
     }
 
