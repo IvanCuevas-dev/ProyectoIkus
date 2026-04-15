@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import api from '../../api'
 
 //XP necesaria por nivel
-let XP_PER_LEVEL = 3000
+let XP_NEXT_LVL = 3000
 
 //Tarjeta de estadística individual
 function StatCard({ label, value }) {
@@ -42,11 +42,16 @@ export default function Profile() {
     }
 
     //Calcula XP para el siguiente nivel y progreso actual
-    let xpProgress = character.experience % XP_PER_LEVEL
-    let xpPct = Math.min(100, Math.round((xpProgress / XP_PER_LEVEL) * 100))
+    let xpProgress = character.experience % XP_NEXT_LVL
+    let xpPct = Math.min(100, Math.round((xpProgress / XP_NEXT_LVL) * 100))
+
+    //Sprite según nivel
+    let TOTAL_SPRITES = 2
+    let spriteIndex = Math.min(Math.floor(character.level / 10) + 1, TOTAL_SPRITES)
+    let sprite = `/img/character/pj-${spriteIndex}.png`
 
     return (
-        <div className="w-full max-w-2xl lg:max-w-4xl xl:max-w-5xl mx-auto py-6 lg:py-10 px-4 lg:px-8">
+        <div className="w-full max-w-2xl lg:max-w-4xl xl:max-w-5xl mx-auto py-6 lg:py-10 lg:px-8 px-4 ">
             <div className="shadow-black/50 shadow-lg bg-darker border border-white/10 rounded-xl p-4 lg:p-6 flex flex-col sm:flex-row gap-4 lg:gap-6">
                 {/* Contenido */}
                 <div className="flex flex-col gap-4 lg:gap-6 flex-1 min-w-0">
@@ -58,7 +63,7 @@ export default function Profile() {
                             </span>
                         </div>
                         <div className="flex flex-col gap-1">
-                            <h2 className="text-primary font-bold text-sm lg:text-base uppercase tracking-widest">
+                            <h2 className="text-primary font-bold text-sm lg:text-xl uppercase tracking-widest">
                                 {character.name}
                             </h2>
                             <span className="text-accent text-xs lg:text-sm font-bold tracking-widest uppercase">
@@ -83,6 +88,7 @@ export default function Profile() {
                         </div>
                     </div>
 
+                    {/* Divisor */}
                     <div className="h-px bg-white/10" />
 
                     {/* Estadísticas */}
@@ -104,19 +110,17 @@ export default function Profile() {
                         <span className="text-primary font-bold text-sm lg:text-base uppercase tracking-widest text-center">
                             Progresión
                         </span>
-                        <div className="flex flex-col gap-2">
-                            <div className="flex justify-between text-xs lg:text-sm text-muted">
-                                <span>Experiencia</span>
-                                <span className="text-accent font-bold">
-                                    {xpProgress} / {XP_PER_LEVEL}
-                                </span>
-                            </div>
-                            <div className="h-2 lg:h-3 bg-white/10 rounded-full overflow-hidden">
-                                <div
-                                    className="h-full bg-accent rounded-full transition-all"
-                                    style={{ width: `${xpPct}%` }}
-                                />
-                            </div>
+                        <div className="flex justify-between text-xs lg:text-sm text-muted">
+                            <span>Experiencia</span>
+                            <span className="text-accent font-bold">
+                                {xpProgress} / {XP_NEXT_LVL}
+                            </span>
+                        </div>
+                        <div className="h-2 lg:h-3 bg-white/10 rounded-full overflow-hidden">
+                            <div
+                                className="h-full bg-accent rounded-full transition-all"
+                                style={{ width: `${xpPct}%` }}
+                            />
                         </div>
                     </div>
                 </div>
@@ -127,7 +131,7 @@ export default function Profile() {
                 {/* Sprite */}
                 <div className="flex flex-col items-center justify-center shrink-0 sm:w-36 lg:w-52 xl:w-64">
                     <img
-                        src="/img/character/pj-1.png"
+                        src={sprite}
                         alt="Sprite del personaje"
                         className="w-3/4 sm:w-full object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.4)] brightness-110"
                     />

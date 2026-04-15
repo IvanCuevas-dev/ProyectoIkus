@@ -9,9 +9,9 @@ export default function Nav() {
     let location = useLocation()
 
     let links = [
-        { to: '/work', label: 'Trabajar' },
-        { to: '/shop', label: 'Mercader' },
-        { to: '/ranking', label: 'Clasificación' },
+        { to: '/work', label: 'Trabajar', icon: '/img/icons/trabajar.png' },
+        { to: '/shop', label: 'Mercader', icon: '/img/icons/mercader.png' },
+        { to: '/ranking', label: 'Clasificación', icon: '/img/icons/clasificacion.png' },
     ]
 
     function handleLogout() {
@@ -50,9 +50,10 @@ export default function Nav() {
                             )}
                             <button
                                 onClick={handleLogout}
-                                className="px-3 py-2 hover:text-accent transition-colors cursor-pointer"
+                                className="flex items-center gap-3 px-3 py-2 hover:text-accent transition-colors cursor-pointer"
                             >
                                 Logout
+                                <img src="/img/icons/logout.png" alt="Logout" className="w-7 h-7 object-contain" />
                             </button>
                         </div>
                     ) : (
@@ -103,7 +104,7 @@ export default function Nav() {
                         </svg>
                     </button>
 
-                    <div className="px-6 py-8 flex flex-col gap-2">
+                    <div className="px-6 py-8 flex flex-col gap-2 h-full">
                         {token ? (
                             <>
                                 {/* Avatar + nombre */}
@@ -130,7 +131,7 @@ export default function Nav() {
                                     <Link
                                         key={link.to}
                                         to={link.to}
-                                        className={`py-2 px-3 rounded no-underline transition-colors text-sm
+                                        className={`flex items-center gap-3 py-2 px-3 rounded no-underline transition-colors text-sm
                                             ${
                                                 location.pathname === link.to
                                                     ? 'text-accent font-bold border-r-2 border-accent bg-accent/10'
@@ -138,20 +139,22 @@ export default function Nav() {
                                             }`}
                                         onClick={() => setMenuOpen(false)}
                                     >
+                                        <img src={link.icon} alt={link.label} className="w-7 h-7 object-contain shrink-0" />
                                         {link.label}
                                     </Link>
                                 ))}
 
-                                {/* Separador */}
+                                {/* Logout al fondo */}
+                                <div className="flex-1" />
                                 <div className="h-px bg-accent/40 my-2" />
-
                                 <button
                                     onClick={() => {
                                         handleLogout()
                                         setMenuOpen(false)
                                     }}
-                                    className="py-2 px-3 hover:text-primary hover:bg-white/5 text-left text-sm rounded cursor-pointer transition-colors"
+                                    className="flex items-center gap-3 py-2 px-3 hover:text-primary hover:bg-white/5 text-left text-sm rounded cursor-pointer transition-colors"
                                 >
+                                    <img src="/img/icons/logout.png" alt="Logout" className="w-7 h-7 object-contain" />
                                     Logout
                                 </button>
                             </>

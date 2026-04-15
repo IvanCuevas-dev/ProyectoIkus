@@ -7,9 +7,9 @@ export default function Sidebar() {
     let location = useLocation()
 
     let links = [
-        { to: '/work', label: 'Trabajar' },
-        { to: '/shop', label: 'Mercader' },
-        { to: '/ranking', label: 'Clasificación' },
+        { to: '/work', label: 'Trabajar', icon: '/img/icons/trabajar.png' },
+        { to: '/shop', label: 'Mercader', icon: '/img/icons/mercader.png' },
+        { to: '/ranking', label: 'Clasificación', icon: '/img/icons/clasificacion.png' },
     ]
 
     return (
@@ -17,7 +17,9 @@ export default function Sidebar() {
             {/* Usuario */}
             <Link to="/profile" className="flex flex-col items-center gap-2 no-underline group">
                 <div className="w-12 h-12 rounded-full bg-accent/20 border border-accent/40 flex items-center justify-center group-hover:border-accent transition-colors">
-                    <span className="text-accent uppercase font-bold text-xl font-display">{user?.name?.[0]?.toUpperCase()}</span>
+                    <span className="text-accent uppercase font-bold text-xl font-display">
+                        {user?.name?.[0]?.toUpperCase()}
+                    </span>
                 </div>
                 <span className="font-bold tracking-wider text-sm group-hover:text-accent transition-colors font-display">
                     {user?.name}
@@ -33,13 +35,14 @@ export default function Sidebar() {
                     <Link
                         key={link.to}
                         to={link.to}
-                        className={`px-3 py-2 rounded text-sm transition-colors no-underline
+                        className={`flex items-center gap-3 px-3 py-2 rounded text-sm transition-colors no-underline
                             ${
                                 location.pathname === link.to
                                     ? 'bg-accent/10 text-accent font-bold border-r-2 border-accent'
                                     : 'hover:text-primary hover:bg-white/5'
                             }`}
                     >
+                        <img src={link.icon} alt={link.label} className="w-7 h-7 object-contain shrink-0" />
                         {link.label}
                     </Link>
                 ))}
