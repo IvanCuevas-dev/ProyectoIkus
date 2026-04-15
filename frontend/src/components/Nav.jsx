@@ -93,6 +93,16 @@ export default function Nav() {
                 <div
                     className={`fixed top-0 right-0 h-screen w-[75vw] max-w-75 z-50 overflow-y-auto transition-transform duration-300 md:hidden bg-[linear-gradient(180deg,#0f1320_0%,#1e2440_50%,#0d1018_100%)] border-l border-accent/20 ${menuOpen ? 'translate-x-0' : 'translate-x-full'}`}
                 >
+                    {/* Botón cerrar */}
+                    <button
+                        className="absolute top-4 right-4 p-2 hover:text-primary transition-colors cursor-pointer"
+                        onClick={() => setMenuOpen(false)}
+                    >
+                        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+
                     <div className="px-6 py-8 flex flex-col gap-2">
                         {token ? (
                             <>

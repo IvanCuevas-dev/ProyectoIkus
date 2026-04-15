@@ -71,7 +71,7 @@ export default function Home() {
     useEffect(() => {
         let timer = setInterval(next, 5000)
         return () => clearInterval(timer)
-    }, [])
+    }, [currentSlide])
 
     return (
         <main className="flex-1 bg-dark">

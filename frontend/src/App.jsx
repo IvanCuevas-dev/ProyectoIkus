@@ -24,13 +24,16 @@ function PublicLayout({ children }) {
 
 function PrivateLayout({ children }) {
     return (
-        <div className="text-primary flex flex-col min-h-screen">
-            <Nav />
-            <div className="flex flex-1 pt-16">
-                <Sidebar />
-                <main className="flex-1 md:ml-52 p-8">{children}</main>
+        <div className="relative text-primary flex flex-col min-h-screen bg-[url('/img/ui/fondo-principal.jpg')] bg-cover bg-center bg-scroll md:bg-fixed">
+            <div className="absolute inset-0 bg-dark/80 z-0" />
+            <div className="relative z-10 flex flex-col min-h-screen">
+                <Nav />
+                <div className="flex flex-1 pt-16">
+                    <Sidebar />
+                    <main className="flex-1 md:ml-52 p-8">{children}</main>
+                </div>
+                <Footer />
             </div>
-            <Footer />
         </div>
     )
 }
