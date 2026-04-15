@@ -8,7 +8,7 @@ class CharacterController extends Controller
 {
     public function show(Request $request)
     {
-        $character = $request->user()->character()->with('equippedItems')->first();
+        $character = $request->user()->character()->first();
 
         if (!$character) {
             return response()->json(['message' => 'Personaje no encontrado'], 404);
