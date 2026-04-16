@@ -21,6 +21,11 @@ class Character extends Model
         'work_ends_at',
     ];
 
+    protected $casts = [
+        'work_started_at' => 'datetime',
+        'work_ends_at'    => 'datetime',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
