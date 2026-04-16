@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class WorkController extends Controller
 {
+    //XP necesaria para calcular cuántos ítems dropean
+    private const XP_PER_DROP = 700;
+    //XP base para subir de nivel (nivel N necesita N * XP_PER_LEVEL)
+    private const XP_PER_LEVEL = 3000;
+
     //Tabla opciones de trabajo: duración en segundos, xp y oro
     private $workOptions = [
         3600   => ['xp' => 600,   'gold' => 120],
@@ -117,7 +122,7 @@ class WorkController extends Controller
     {
         //Xp por drop y cantidad de drops
         $droppedItems = [];
-        $xpPerDrop = 700;
+        $xpPerDrop = self::XP_PER_DROP;
         $drops = (int) floor($xpEarned / $xpPerDrop);
 
         //Mapa que baja un nivel de rareza si no hay drop [anteriorRareza, bonusLvl]
@@ -194,7 +199,7 @@ class WorkController extends Controller
         //Sube niveles mientras la XP total supere la necesaria para el siguiente nivel
         while ($character->experience >= $character->experience_next_lvl) {
             $character->level++;
-            $character->experience_next_lvl = $character->level * 3000;
+            $character->experience_next_lvl = $character->level * self::XP_PER_LEVEL;
         }
     }
 }
