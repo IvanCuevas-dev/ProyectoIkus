@@ -191,21 +191,10 @@ class WorkController extends Controller
     //Subida de nivel del personaje
     private function levelUp($character)
     {
-        $baseXp = 3000;
-        $newLevel = $character->level;
-
-        //Sube niveles mientras la XP acumulada supere el umbral del siguiente nivel
-        while (true) {
-            $xpForNextLevel = $baseXp * (($newLevel + 1) * ($newLevel + 2) / 2);
-            if ($character->experience >= $xpForNextLevel) {
-                $newLevel++;
-            } else {
-                break;
-            }
-        }
-
-        if ($newLevel > $character->level) {
-            $character->level = $newLevel;
+        //Sube niveles mientras la XP total supere la necesaria para el siguiente nivel
+        while ($character->experience >= $character->experience_next_lvl) {
+            $character->level++;
+            $character->experience_next_lvl = $character->level * 3000;
         }
     }
 }

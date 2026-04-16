@@ -13,6 +13,7 @@ class Character extends Model
         'name',
         'level',
         'experience',
+        'experience_next_lvl',
         'gold',
         'health',
         'attack',

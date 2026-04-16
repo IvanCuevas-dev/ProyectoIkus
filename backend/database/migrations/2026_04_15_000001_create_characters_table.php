@@ -14,6 +14,7 @@ return new class extends Migration
             $table->string('name', 50);
             $table->integer('level')->default(1);
             $table->integer('experience')->default(0);
+            $table->integer('experience_next_lvl')->default(3000);
             $table->integer('gold')->default(0);
             $table->integer('health')->default(100);
             $table->integer('attack')->default(10);
