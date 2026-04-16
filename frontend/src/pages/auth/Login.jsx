@@ -16,7 +16,15 @@ export default function Login() {
             await login({ name, password })
             navigate('/profile')
         } catch (err) {
-            setError('Credenciales incorrectas')
+            let errors = err.response?.data?.errors
+            let message = err.response?.data?.message
+            if (errors?.name) {
+                setError(errors.name[0])
+            } else if (errors?.password) {
+                setError(errors.password[0])
+            } else {
+                setError(message ?? 'Error al iniciar sesión, inténtalo de nuevo.')
+            }
         }
     }
 

@@ -10,6 +10,7 @@ export default function Registro() {
     let [error, setError] = useState(null)
     let navigate = useNavigate()
 
+    // Envío de formulario y manejo errores
     async function handleSubmit(e) {
         e.preventDefault()
         try {
@@ -18,13 +19,13 @@ export default function Registro() {
         } catch (err) {
             let errors = err.response?.data?.errors
             if (errors?.name) {
-                setError('El nombre de personaje ya está en uso')
+                setError(errors.name[0])
             } else if (errors?.email) {
-                setError('El correo electrónico ya está registrado')
+                setError(errors.email[0])
             } else if (errors?.password) {
-                setError('La contraseña debe tener al menos 8 caracteres')
+                setError(errors.password[0])
             } else {
-                setError('Error al registrarse, inténtalo de nuevo')
+                setError('Error al registrarse, inténtalo de nuevo.')
             }
         }
     }
