@@ -7,6 +7,7 @@ use App\Models\Character;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Database\Seeders\ItemSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -27,5 +28,7 @@ class DatabaseSeeder extends Seeder
             ['user_id' => $admin->id],
             ['name' => $admin->name]
         );
+
+        $this->call(ItemSeeder::class);
     }
 }
