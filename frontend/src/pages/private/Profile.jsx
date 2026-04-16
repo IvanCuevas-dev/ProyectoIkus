@@ -66,10 +66,10 @@ export default function Profile() {
                             <h2 className="text-primary font-bold text-sm lg:text-xl uppercase tracking-widest">
                                 {character.name}
                             </h2>
-                            <span className="text-accent text-xs lg:text-sm font-bold tracking-widest uppercase">
+                            <span className="text-accent text-xs lg:text-sm font-bold tracking-widest">
                                 Nivel {character.level}
                             </span>
-                            <span className="flex items-center gap-1 text-xs lg:text-sm">
+                            <span className="flex items-center gap-2 text-xs lg:text-sm">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20"

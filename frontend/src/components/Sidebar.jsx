@@ -21,7 +21,7 @@ export default function Sidebar() {
                         {user?.name?.[0]?.toUpperCase()}
                     </span>
                 </div>
-                <span className="font-bold tracking-wider text-sm group-hover:text-accent transition-colors font-display">
+                <span className="font-bold tracking-widest text-md group-hover:text-accent transition-colors">
                     {user?.name}
                 </span>
             </Link>

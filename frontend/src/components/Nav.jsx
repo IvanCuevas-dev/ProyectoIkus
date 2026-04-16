@@ -110,15 +110,15 @@ export default function Nav() {
                                 {/* Avatar + nombre */}
                                 <Link
                                     to="/profile"
-                                    className="flex flex-col items-center gap-2 mb-4 no-underline"
+                                    className="flex flex-col items-center gap-2 mb-4 no-underline group"
                                     onClick={() => setMenuOpen(false)}
                                 >
-                                    <div className="w-12 h-12 rounded-full bg-accent/20 border border-accent/40 flex items-center justify-center hover:border-accent transition-colors">
-                                        <span className="text-accent font-bold text-lg font-display">
+                                    <div className="w-12 h-12 rounded-full bg-accent/20 border border-accent/40 flex items-center justify-center group-hover:border-accent transition-colors">
+                                        <span className="text-accent uppercase font-bold text-xl font-display">
                                             {user?.name?.[0]?.toUpperCase()}
                                         </span>
                                     </div>
-                                    <span className="text-primary font-bold tracking-wider text-sm font-display">
+                                    <span className="font-bold tracking-widest text-md group-hover:text-accent transition-colors">
                                         {user?.name}
                                     </span>
                                 </Link>
