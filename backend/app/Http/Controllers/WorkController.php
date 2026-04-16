@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Inventory;
+use App\Models\Item;
 use Illuminate\Http\Request;
 
 class WorkController extends Controller
@@ -21,9 +23,7 @@ class WorkController extends Controller
         64800  => ['xp' => 10800, 'gold' => 2160],
         86400  => ['xp' => 14400, 'gold' => 2880],
         604800 => ['xp' => 100800, 'gold' => 20160],
-
     ];
-
 
     //Inicia el trabajo del pj
     public function start(Request $request)
@@ -39,20 +39,21 @@ class WorkController extends Controller
             return response()->json(['message' => 'Duración no válida'], 422);
         }
 
-        //Validar que no esté trabajando y actualizar valores en BBDD
-        if ($character->work_started_at == null) {
-            $character->work_started_at = now();
-            $character->work_ends_at = now()->addSeconds($request->duration);
-            $character->save();
-        } else {
+        //Validar que no esté trabajando
+        if ($character->work_started_at !== null) {
             return response()->json(['message' => 'El personaje ya está trabajando'], 409);
         }
+
+        //Actualizar campos de trabajo en la BBDD
+        $character->work_started_at = now();
+        $character->work_ends_at = now()->addSeconds($request->duration);
+        $character->save();
 
         //Devuelvo el pj con los cambios
         return response()->json($character);
     }
 
-    //Finaliza el trabajo u calcula recompensas
+    //Finaliza el trabajo y calcula recompensas
     public function finish(Request $request)
     {
         //Obtener pj
@@ -66,21 +67,18 @@ class WorkController extends Controller
             return response()->json(['message' => 'El personaje no está trabajando'], 409);
         }
 
-        //Calcular tiempo trabajado y duración elegida
-        $timeWorked = $character->work_started_at->diffInSeconds(min(now(), $character->work_ends_at));
-        $durationChosen = $character->work_started_at->diffInSeconds($character->work_ends_at);
+        //Calcular recompensas proporcionales al tiempo trabajado
+        [$xpEarned, $goldEarned] = $this->calculateRewards($character);
 
-        //Calcular proporción de tiempo trabajada
-        $proportion = $timeWorked / $durationChosen;
+        //Calcular drops de ítems
+        $droppedItems = $this->calculateDrops($character, $xpEarned);
 
-        //Obtener xp y oro máximos de la opción elegida
-        $option = $this->workOptions[$durationChosen];
-        $xpEarned = (int) floor($proportion * $option['xp']);
-        $goldEarned = (int) floor($proportion * $option['gold']);
-
-        //Aplicar recompensas
+        //Aplicar XP y oro al personaje
         $character->experience += $xpEarned;
         $character->gold += $goldEarned;
+
+        //Comprobar subida de nivel
+        $this->levelUp($character);
 
         //Limpiar campos de trabajo en la BBDD
         $character->work_started_at = null;
@@ -89,9 +87,125 @@ class WorkController extends Controller
 
         //Devolver recompensas obtenidas
         return response()->json([
-            'xp_earned'   => $xpEarned,
+            'xp_earned' => $xpEarned,
             'gold_earned' => $goldEarned,
-            'character'   => $character,
+            'items_dropped' => $droppedItems,
+            'character' => $character,
         ]);
+    }
+
+    //Calcula xp y oro ganados proporcionalmente al tiempo trabajado
+    private function calculateRewards($character)
+    {
+        //Calculo segundos trabajados
+        $timeWorked = $character->work_started_at->diffInSeconds(min(now(), $character->work_ends_at));
+        //Calculo duración elegida
+        $durationChosen = $character->work_started_at->diffInSeconds($character->work_ends_at);
+        //Calculo porcentaje de tiempo real trabajado
+        $proportion = $timeWorked / $durationChosen;
+
+        //Calculo xp y oro ganado
+        $option = $this->workOptions[$durationChosen];
+        $xpEarned = (int) floor($proportion * $option['xp']);
+        $goldEarned = (int) floor($proportion * $option['gold']);
+
+        return [$xpEarned, $goldEarned];
+    }
+
+    //Calcula los ítems que caen según la xp ganada y los añade al inventario
+    private function calculateDrops($character, $xpEarned)
+    {
+        //Xp por drop y cantidad de drops
+        $droppedItems = [];
+        $xpPerDrop = 700;
+        $drops = (int) floor($xpEarned / $xpPerDrop);
+
+        //Mapa que baja un nivel de rareza si no hay drop [anteriorRareza, bonusLvl]
+        $rarityFallback = [
+            'legendary' => ['epic', 2],
+            'epic' => ['rare', 0],
+            'rare' => ['common', 0],
+            'common' => null,
+        ];
+
+        //Tiradas random para determinar la rareza de los items encontrados
+        for ($i = 0; $i < $drops; $i++) {
+            $roll = rand(1, 100);
+            if ($roll <= 60) {
+                $rarity = 'common';
+                $levelBonus = 0;
+            } elseif ($roll <= 85) {
+                $rarity = 'rare';
+                $levelBonus = 0;
+            } elseif ($roll <= 97) {
+                $rarity = 'epic';
+                $levelBonus = 2;
+            } else {
+                $rarity = 'legendary';
+                $levelBonus = 3;
+            }
+
+            //Buscar ítem aleatorio que cumpla restricción de nivel
+            //Si no hay disponible en esa rareza, baja al nivel anterior
+            $item = null;
+            $currentRarity = $rarity;
+            $currentBonus = $levelBonus;
+
+            while (!$item && $currentRarity !== null) {
+                $item = Item::where('rarity', $currentRarity)
+                    ->where('required_level', '<=', $character->level + $currentBonus)
+                    ->inRandomOrder()
+                    ->first();
+
+                if (!$item) {
+                    $fallback = $rarityFallback[$currentRarity];
+                    if ($fallback === null) break;
+                    [$currentRarity, $currentBonus] = $fallback;
+                }
+            }
+
+            //Si no hay ningún ítem disponible en ninguna rareza, descartar drop
+            if (!$item) continue;
+
+            //Añadir al inventario: incrementar cantidad si ya existe, crear si no
+            $inventory = Inventory::where('character_id', $character->id)
+                ->where('item_id', $item->id)
+                ->first();
+
+            if ($inventory) {
+                $inventory->increment('quantity');
+            } else {
+                Inventory::create([
+                    'character_id' => $character->id,
+                    'item_id' => $item->id,
+                    'quantity' => 1,
+                ]);
+            }
+
+            $droppedItems[] = $item;
+        }
+
+        return $droppedItems;
+    }
+
+    //Subida de nivel del personaje
+    private function levelUp($character)
+    {
+        $baseXp = 3000;
+        $newLevel = $character->level;
+
+        //Sube niveles mientras la XP acumulada supere el umbral del siguiente nivel
+        while (true) {
+            $xpForNextLevel = $baseXp * (($newLevel + 1) * ($newLevel + 2) / 2);
+            if ($character->experience >= $xpForNextLevel) {
+                $newLevel++;
+            } else {
+                break;
+            }
+        }
+
+        if ($newLevel > $character->level) {
+            $character->level = $newLevel;
+        }
     }
 }
