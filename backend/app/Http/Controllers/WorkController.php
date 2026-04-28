@@ -10,7 +10,7 @@ class WorkController extends Controller
 {
     //XP necesaria para calcular cuántos ítems dropean
     private const XP_PER_DROP = 700;
-    //XP base para subir de nivel (nivel N necesita N * XP_PER_LEVEL)
+    //XP base para subir de nivel
     private const XP_PER_LEVEL = 3000;
 
     //Tabla opciones de trabajo: duración en segundos, xp y oro
@@ -122,8 +122,7 @@ class WorkController extends Controller
     {
         //Xp por drop y cantidad de drops
         $droppedItems = [];
-        $xpPerDrop = self::XP_PER_DROP;
-        $drops = (int) floor($xpEarned / $xpPerDrop);
+        $drops = (int) floor($xpEarned / self::XP_PER_DROP);
 
         //Mapa que baja un nivel de rareza si no hay drop [anteriorRareza, bonusLvl]
         $rarityFallback = [

@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react'
 import api from '../../api'
 
-//XP necesaria por nivel
-let XP_NEXT_LVL = 3000
-
-//Tarjeta de estadística individual
+//Tarjeta de estadística
 function StatCard({ label, value }) {
     return (
         <div className="flex flex-col items-center gap-1 lg:gap-2 bg-dark border border-white/10 rounded-lg py-3 lg:py-4 px-2 flex-1">
@@ -41,9 +38,12 @@ export default function Profile() {
         )
     }
 
-    //Calcula XP para el siguiente nivel y progreso actual
-    let xpProgress = character.experience % XP_NEXT_LVL
-    let xpPct = Math.min(100, Math.round((xpProgress / XP_NEXT_LVL) * 100))
+    //Calcula progreso XP dentro del nivel actual
+    let xpNextLvl = character.experience_next_lvl
+    let xpPerLevel = xpNextLvl / character.level
+    let xpPrevLvl = xpNextLvl - xpPerLevel
+    let xpInLevel = character.experience - xpPrevLvl
+    let xpPct = Math.min(100, Math.round((xpInLevel / xpPerLevel) * 100))
 
     //Sprite según nivel
     let TOTAL_SPRITES = 2
@@ -111,9 +111,12 @@ export default function Profile() {
                             Progresión
                         </span>
                         <div className="flex justify-between text-xs lg:text-sm text-muted">
-                            <span>Experiencia</span>
-                            <span className="text-accent font-bold">
-                                {xpProgress} / {XP_NEXT_LVL}
+                            <span>
+                                Experiencia: <span className="text-accent font-bold">{character.experience}</span>
+                            </span>
+                            <span>
+                                Siguiente nivel:{' '}
+                                <span className="text-accent font-bold">{xpNextLvl - character.experience}</span>
                             </span>
                         </div>
                         <div className="h-2 lg:h-3 bg-white/10 rounded-full overflow-hidden">
