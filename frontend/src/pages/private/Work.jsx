@@ -142,7 +142,7 @@ export default function Work() {
                             <select
                                 value={selectedDuration}
                                 onChange={(e) => setSelectedDuration(Number(e.target.value))}
-                                className="bg-dark border border-white/20 text-primary rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-accent/60 w-full sm:w-auto"
+                                className="cursor-pointer bg-dark border border-white/20 text-primary rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-accent/60 w-full sm:w-auto"
                             >
                                 {WORK_OPTIONS.map((opt) => (
                                     <option key={opt.seconds} value={opt.seconds}>
@@ -153,7 +153,7 @@ export default function Work() {
 
                             <button
                                 onClick={handleStart}
-                                className="bg-accent/20 hover:bg-accent/30 border border-accent/40 text-accent font-bold text-sm uppercase tracking-widest rounded-lg px-6 py-2 transition-colors w-full sm:w-auto"
+                                className="cursor-pointer bg-accent/20 hover:bg-accent/30 border border-accent/40 text-accent font-bold text-sm uppercase tracking-widest rounded-lg px-6 py-2 transition-colors w-full sm:w-auto"
                             >
                                 Trabajar
                             </button>
@@ -173,7 +173,7 @@ export default function Work() {
 
                         <button
                             onClick={handleFinish}
-                            className="bg-accent/20 hover:bg-accent/30 border border-accent/40 text-accent font-bold text-sm uppercase tracking-widest rounded-lg px-6 py-2 transition-colors"
+                            className="cursor-pointer bg-accent/20 hover:bg-accent/30 border border-accent/40 text-accent font-bold text-sm uppercase tracking-widest rounded-lg px-6 py-2 transition-colors"
                         >
                             {isDone ? 'Recoger recompensas' : 'Dejar de trabajar'}
                         </button>
@@ -225,7 +225,7 @@ export default function Work() {
 
                         <button
                             onClick={() => setRewards(null)}
-                            className="bg-accent/20 hover:bg-accent/30 border border-accent/40 text-accent font-bold text-sm uppercase tracking-widest rounded-lg px-6 py-2 transition-colors self-center"
+                            className="cursor-pointer bg-accent/20 hover:bg-accent/30 border border-accent/40 text-accent font-bold text-sm uppercase tracking-widest rounded-lg px-6 py-2 transition-colors self-center"
                         >
                             Volver a trabajar
                         </button>
@@ -242,10 +242,10 @@ export default function Work() {
 //Color según rareza del ítem
 function rarityColor(rarity) {
     let colors = {
-        common: 'text-muted',
-        rare: 'text-blue-400',
-        epic: 'text-purple-400',
-        legendary: 'text-amber-400',
+        'común': 'text-muted',
+        'rara': 'text-blue-400',
+        'épica': 'text-purple-400',
+        'legendaria': 'text-amber-400',
     }
     return colors[rarity] ?? 'text-muted'
 }

@@ -1,15 +1,15 @@
 let RARITY_COLORS = {
-    common: 'text-muted',
-    rare: 'text-blue-400',
-    epic: 'text-purple-400',
-    legendary: 'text-amber-400',
+    'común': 'text-muted',
+    'rara': 'text-blue-400',
+    'épica': 'text-purple-400',
+    'legendaria': 'text-amber-400',
 }
 
 let RARITY_BORDERS = {
-    common: 'border-white/20',
-    rare: 'border-blue-400',
-    epic: 'border-purple-400',
-    legendary: 'border-amber-400',
+    'común': 'border-white/20',
+    'rara': 'border-blue-400',
+    'épica': 'border-purple-400',
+    'legendaria': 'border-amber-400',
 }
 
 //Tooltip con la info completa de un item
