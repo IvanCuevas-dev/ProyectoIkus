@@ -126,26 +126,26 @@ class WorkController extends Controller
 
         //Mapa que baja un nivel de rareza si no hay drop [anteriorRareza, bonusLvl]
         $rarityFallback = [
-            'legendary' => ['epic', 2],
-            'epic' => ['rare', 0],
-            'rare' => ['common', 0],
-            'common' => null,
+            'legendaria' => ['épica', 2],
+            'épica' => ['rara', 0],
+            'rara' => ['común', 0],
+            'común' => null,
         ];
 
         //Tiradas random para determinar la rareza de los items encontrados
         for ($i = 0; $i < $drops; $i++) {
             $roll = rand(1, 100);
             if ($roll <= 60) {
-                $rarity = 'common';
+                $rarity = 'común';
                 $levelBonus = 0;
             } elseif ($roll <= 85) {
-                $rarity = 'rare';
+                $rarity = 'rara';
                 $levelBonus = 0;
             } elseif ($roll <= 97) {
-                $rarity = 'epic';
+                $rarity = 'épica';
                 $levelBonus = 2;
             } else {
-                $rarity = 'legendary';
+                $rarity = 'legendaria';
                 $levelBonus = 3;
             }
 

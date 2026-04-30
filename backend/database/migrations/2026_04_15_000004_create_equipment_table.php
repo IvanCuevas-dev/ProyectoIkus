@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('character_id')->constrained('characters')->cascadeOnDelete();
             $table->foreignId('item_id')->constrained('items')->cascadeOnDelete();
-            $table->enum('slot', ['weapon', 'helmet', 'armor', 'boots', 'ring']);
+            $table->enum('slot', ['arma', 'yelmo', 'armadura', 'botas', 'anillo']);
         });
     }
 

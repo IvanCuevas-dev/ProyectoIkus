@@ -13,8 +13,8 @@ return new class extends Migration
             $table->string('name', 100);
             $table->text('description')->nullable();
             $table->string('type', 50)->nullable();
-            $table->enum('rarity', ['common', 'rare', 'epic', 'legendary'])->default('common');
-            $table->enum('slot', ['weapon', 'helmet', 'armor', 'boots', 'ring'])->nullable();
+            $table->enum('rarity', ['común', 'rara', 'épica', 'legendaria'])->default('común');
+            $table->enum('slot', ['arma', 'yelmo', 'armadura', 'botas', 'anillo'])->nullable();
             $table->integer('attack')->default(0);
             $table->integer('defense')->default(0);
             $table->integer('health')->default(0);
