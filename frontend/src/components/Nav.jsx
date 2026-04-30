@@ -10,6 +10,7 @@ export default function Nav() {
 
     let links = [
         { to: '/work', label: 'Trabajar', icon: '/img/icons/trabajar.png' },
+        { to: '/inventory', label: 'Inventario', icon: '/img/icons/mercader.png' },
         { to: '/shop', label: 'Mercader', icon: '/img/icons/mercader.png' },
         { to: '/ranking', label: 'Clasificación', icon: '/img/icons/clasificacion.png' },
     ]
