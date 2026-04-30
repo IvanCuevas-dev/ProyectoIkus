@@ -11,6 +11,7 @@ import Shop from './pages/private/Shop'
 import Ranking from './pages/private/Ranking'
 import Work from './pages/private/Work'
 import Profile from './pages/private/Profile'
+import Inventory from './pages/private/Inventory'
 
 function PublicLayout({ children }) {
     return (
@@ -93,6 +94,16 @@ export default function App() {
                             <PrivateRoute>
                                 <PrivateLayout>
                                     <Ranking />
+                                </PrivateLayout>
+                            </PrivateRoute>
+                        }
+                    />
+                    <Route
+                        path="/inventory"
+                        element={
+                            <PrivateRoute>
+                                <PrivateLayout>
+                                    <Inventory />
                                 </PrivateLayout>
                             </PrivateRoute>
                         }
