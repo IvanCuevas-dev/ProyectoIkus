@@ -19,6 +19,7 @@ class ItemSeeder extends Seeder
                 'attack' => 5,
                 'defense' => 0,
                 'health' => 0,
+                'image' => '/img/items/espada-hierro.gif',
                 'required_level' => 1,
             ],
             [
@@ -30,6 +31,7 @@ class ItemSeeder extends Seeder
                 'attack' => 0,
                 'defense' => 3,
                 'health' => 0,
+                'image' => '/img/items/escudo-madera.png',
                 'required_level' => 1,
             ],
             [
@@ -41,6 +43,7 @@ class ItemSeeder extends Seeder
                 'attack' => 12,
                 'defense' => 0,
                 'health' => 0,
+                'image' => '/img/items/espada-acero.png',
                 'required_level' => 3,
             ],
             [
@@ -52,6 +55,7 @@ class ItemSeeder extends Seeder
                 'attack' => 0,
                 'defense' => 20,
                 'health' => 50,
+                'image' => '/img/items/armadura-placas.gif',
                 'required_level' => 5,
             ],
             [
@@ -63,6 +67,7 @@ class ItemSeeder extends Seeder
                 'attack' => 50,
                 'defense' => 0,
                 'health' => 0,
+                'image' => '/img/items/espada-legendaria.gif',
                 'required_level' => 10,
             ],
         ];
