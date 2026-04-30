@@ -30,7 +30,7 @@ export default function Inventory() {
         <>
             <p>Inventario</p>
 
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 justify-center">
                 {inventory.map((entry) => (
                     <div
                         key={entry.item_id}
@@ -38,8 +38,11 @@ export default function Inventory() {
                         onMouseEnter={() => setHoveredId(entry.id)}
                         onMouseLeave={() => setHoveredId(null)}
                     >
-                        <span className="text-primary font-bold text-center leading-tight">{entry.item.name}</span>
-                        <span className="text-muted">x{entry.quantity}</span>
+                        {entry.item.image
+                            ? <img src={entry.item.image} alt={entry.item.name} className="w-10 h-10 object-contain" />
+                            : <span className="text-primary font-bold text-center leading-tight text-xs">{entry.item.name}</span>
+                        }
+                        <span className="text-muted text-xs">x{entry.quantity}</span>
                         <ItemTooltip item={entry.item} visible={hoveredId === entry.id} />
                     </div>
                 ))}

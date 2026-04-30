@@ -21,9 +21,10 @@ export default function ItemTooltip({ item, visible }) {
             {/* Nombre + imagen */}
             <div className="flex items-center justify-between gap-2">
                 <span className={`font-bold text-base leading-tight ${RARITY_COLORS[item.rarity]}`}>{item.name}</span>
-                <div
-                    className={`w-10 h-10 shrink-0 bg-darker border-2 rounded-full flex items-center justify-center text-muted text-sm text-center leading-tight ${RARITY_BORDERS[item.rarity]}`}
-                ></div>
+                {item.image
+                    ? <img src={item.image} alt={item.name} className="w-10 h-10 object-contain shrink-0" />
+                    : <span className="text-muted text-xs text-center leading-tight shrink-0">{item.slot}</span>
+                }
             </div>
 
             {/* Nivel y slot */}
