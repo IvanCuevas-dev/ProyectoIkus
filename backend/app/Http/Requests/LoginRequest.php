@@ -31,7 +31,7 @@ class LoginRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required'     => 'El nombre de personaje es obligatorio.',
+            'name.required'     => 'El nombre del personaje es obligatorio.',
             'password.required' => 'La contraseña es obligatoria.',
         ];
     }
