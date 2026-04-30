@@ -30,16 +30,16 @@ export default function Inventory() {
         <>
             <p>Inventario</p>
 
-            <div className="grid grid-cols-8">
+            <div className="flex flex-wrap gap-2">
                 {inventory.map((entry) => (
                     <div
                         key={entry.item_id}
-                        className="relative cursor-pointer bg-dark border border-white/10 rounded-lg px-3 py-2 text-xs flex flex-col items-center gap-1 min-w-20"
+                        className="relative cursor-pointer bg-dark border border-white/10 rounded-lg text-sm flex flex-col items-center justify-center gap-1 w-20 h-20"
                         onMouseEnter={() => setHoveredId(entry.id)}
                         onMouseLeave={() => setHoveredId(null)}
                     >
                         <span className="text-primary font-bold text-center leading-tight">{entry.item.name}</span>
-                        <span className="text-muted">{entry.quantity}</span>
+                        <span className="text-muted">x{entry.quantity}</span>
                         <ItemTooltip item={entry.item} visible={hoveredId === entry.id} />
                     </div>
                 ))}
