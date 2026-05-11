@@ -11,10 +11,6 @@ class CharacterController extends Controller
     {
         $character = $request->user()->character()->first();
 
-        if (!$character) {
-            return response()->json(['message' => 'Personaje no encontrado'], 404);
-        }
-
         return response()->json($character);
     }
 }

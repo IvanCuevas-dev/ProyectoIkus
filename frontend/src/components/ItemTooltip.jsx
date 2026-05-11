@@ -1,18 +1,18 @@
 let RARITY_COLORS = {
-    'común': 'text-muted',
-    'rara': 'text-blue-400',
-    'épica': 'text-purple-400',
-    'legendaria': 'text-amber-400',
+    común: 'text-muted',
+    rara: 'text-blue-400',
+    épica: 'text-purple-400',
+    legendaria: 'text-amber-400',
 }
 
 let RARITY_BORDERS = {
-    'común': 'border-white/20',
-    'rara': 'border-blue-400',
-    'épica': 'border-purple-400',
-    'legendaria': 'border-amber-400',
+    común: 'border-white/20',
+    rara: 'border-blue-400',
+    épica: 'border-purple-400',
+    legendaria: 'border-amber-400',
 }
 
-//Tooltip con la info completa de un item
+//Tooltip
 export default function ItemTooltip({ item, visible }) {
     if (!visible) return null
 
@@ -21,10 +21,11 @@ export default function ItemTooltip({ item, visible }) {
             {/* Nombre + imagen */}
             <div className="flex items-center justify-between gap-2">
                 <span className={`font-bold text-base leading-tight ${RARITY_COLORS[item.rarity]}`}>{item.name}</span>
-                {item.image
-                    ? <img src={item.image} alt={item.name} className="w-10 h-10 object-contain shrink-0" />
-                    : <span className="text-muted text-xs text-center leading-tight shrink-0">{item.slot}</span>
-                }
+                {item.image ? (
+                    <img src={item.image} alt={item.name} className="w-10 h-10 object-contain shrink-0" />
+                ) : (
+                    <span className="text-muted text-xs text-center leading-tight shrink-0">{item.slot}</span>
+                )}
             </div>
 
             {/* Nivel y slot */}

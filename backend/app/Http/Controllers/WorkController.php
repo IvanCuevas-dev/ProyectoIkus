@@ -35,18 +35,15 @@ class WorkController extends Controller
     {
         //Obtener pj
         $character = $request->user()->character()->first();
-        if (!$character) {
-            return response()->json(['message' => 'Personaje no encontrado'], 404);
-        }
 
-        //Validar duración 
+        //Validar duración
         if (!isset($this->workOptions[$request->duration])) {
-            return response()->json(['message' => 'Duración no válida'], 422);
+            return response()->json(['message' => 'Duración no válida']);
         }
 
         //Validar que no esté trabajando
         if ($character->work_started_at !== null) {
-            return response()->json(['message' => 'El personaje ya está trabajando'], 409);
+            return response()->json(['message' => 'El personaje ya está trabajando']);
         }
 
         //Actualizar campos de trabajo en la BBDD
@@ -63,13 +60,10 @@ class WorkController extends Controller
     {
         //Obtener pj
         $character = $request->user()->character()->first();
-        if (!$character) {
-            return response()->json(['message' => 'Personaje no encontrado'], 404);
-        }
 
         //Validar que esté trabajando
         if ($character->work_started_at === null) {
-            return response()->json(['message' => 'El personaje no está trabajando'], 409);
+            return response()->json(['message' => 'El personaje no está trabajando']);
         }
 
         //Calcular recompensas proporcionales al tiempo trabajado

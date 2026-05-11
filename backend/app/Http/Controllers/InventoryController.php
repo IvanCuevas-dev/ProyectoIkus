@@ -13,10 +13,6 @@ class InventoryController extends Controller
 
         $character = $request->user()->character()->first();
 
-        if (!$character) {
-            return response()->json(['message' => 'Personaje no encontrado'], 404);
-        }
-
         $inventory = Inventory::where('character_id', $character->id)
             ->with('item')
             ->get();
