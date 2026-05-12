@@ -18,13 +18,30 @@ let WORK_OPTIONS = [
     { label: '1 semana', seconds: 604800 },
 ]
 
+//Color de texto según rareza del ítem
+function rarityColor(rarity) {
+    let colors = {
+        común: 'text-muted',
+        rara: 'text-blue-400',
+        épica: 'text-purple-400',
+        legendaria: 'text-amber-400',
+    }
+    return colors[rarity] ?? 'text-muted'
+}
+
 //Convierte segundos a HH:MM:SS
 function formatTime(seconds) {
     let s = Math.max(0, seconds)
     let h = Math.floor(s / 3600)
     let m = Math.floor((s % 3600) / 60)
     let sec = s % 60
-    return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(sec).padStart(2, '0')}`
+
+    //Añade un 0 a la izquierda si el número tiene un solo dígito
+    function pad(n) {
+        return String(n).padStart(2, '0')
+    }
+
+    return `${pad(h)}:${pad(m)}:${pad(sec)}`
 }
 
 export default function Work() {
@@ -35,7 +52,7 @@ export default function Work() {
     //Duración seleccionada en el select
     let [selectedDuration, setSelectedDuration] = useState(WORK_OPTIONS[0].seconds)
 
-    //Segundos restantes para el countdown
+    //Segundos restantes para terminar de trabajar
     let [timeLeft, setTimeLeft] = useState(null)
 
     //Recompensas obtenidas al terminar
@@ -44,6 +61,7 @@ export default function Work() {
     //Error de acción (start/finish)
     let [actionError, setActionError] = useState(null)
 
+    //Guarda el intervalo sin renderizar el componente
     let intervalRef = useRef(null)
 
     //Carga el personaje para saber si ya está trabajando
@@ -78,9 +96,11 @@ export default function Work() {
             if (remaining <= 0) clearInterval(intervalRef.current)
         }, 1000)
 
+        //Limpia el intervalo al desmontar el componente o al cambiar work_ends_at
         return () => clearInterval(intervalRef.current)
     }, [character?.work_ends_at])
 
+    //Inicia el trabajo con la duración seleccionada
     async function handleStart() {
         setActionError(null)
         try {
@@ -92,11 +112,13 @@ export default function Work() {
         }
     }
 
+    //Finaliza el trabajo y recoge las recompensas
     async function handleFinish() {
         setActionError(null)
         try {
             let res = await api.post('/work/finish')
             setCharacter(res.data.character)
+            //Guarda xp, oro e ítems obtenidos para mostrarlos
             setRewards({
                 xp: res.data.xp_earned,
                 gold: res.data.gold_earned,
@@ -107,6 +129,7 @@ export default function Work() {
         }
     }
 
+    //Mensaje mientras carga
     if (loading) {
         return <div className="flex items-center justify-center h-64 text-sm animate-pulse">Cargando...</div>
     }
@@ -119,7 +142,9 @@ export default function Work() {
         )
     }
 
-    let isWorking = !!character.work_ends_at
+    //Si work_ends_at no es null, el personaje está trabajando
+    let isWorking = character.work_ends_at !== null
+    //El trabajo está terminado cuando el countdown llega a cero
     let isDone = isWorking && timeLeft !== null && timeLeft <= 0
 
     return (
@@ -166,7 +191,7 @@ export default function Work() {
                     <div className="flex flex-col items-center gap-6">
                         <p className="text-muted text-sm">Tu personaje está trabajando...</p>
 
-                        {/* Countdown */}
+                        {/* Countdown en formato HH:MM:SS */}
                         <div className="text-accent font-bold text-5xl lg:text-6xl font-display tracking-widest tabular-nums">
                             {timeLeft !== null ? formatTime(timeLeft) : '--:--:--'}
                         </div>
@@ -175,6 +200,7 @@ export default function Work() {
                             onClick={handleFinish}
                             className="cursor-pointer bg-accent/20 hover:bg-accent/30 border border-accent/40 text-accent font-bold text-sm uppercase tracking-widest rounded-lg px-6 py-2 transition-colors"
                         >
+                            {/*El texto cambia cuando el countdown llega a cero*/}
                             {isDone ? 'Recoger recompensas' : 'Dejar de trabajar'}
                         </button>
                     </div>
@@ -211,10 +237,13 @@ export default function Work() {
                                             key={i}
                                             className="bg-dark border border-white/10 rounded-lg px-3 py-2 text-xs flex flex-col items-center gap-1 min-w-20"
                                         >
-                                            {item.image
-                                                ? <img src={item.image} alt={item.name} className="w-10 h-10 object-contain" />
-                                                : null
-                                            }
+                                            {item.image ? (
+                                                <img
+                                                    src={item.image}
+                                                    alt={item.name}
+                                                    className="w-10 h-10 object-contain"
+                                                />
+                                            ) : null}
                                             <span className="text-primary font-bold">{item.name}</span>
                                             <span className={rarityColor(item.rarity)}>{item.rarity}</span>
                                         </div>
@@ -241,15 +270,4 @@ export default function Work() {
             </div>
         </div>
     )
-}
-
-//Color según rareza del ítem
-function rarityColor(rarity) {
-    let colors = {
-        'común': 'text-muted',
-        'rara': 'text-blue-400',
-        'épica': 'text-purple-400',
-        'legendaria': 'text-amber-400',
-    }
-    return colors[rarity] ?? 'text-muted'
 }
