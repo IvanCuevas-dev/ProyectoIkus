@@ -53,6 +53,11 @@ class EquipmentController extends Controller
             ->with('item')
             ->first();
 
+        //Si el mismo item ya está equipado, no hacer nada
+        if ($equippedSlot && $equippedSlot->item_id === $item->id) {
+            return response()->json(['message' => 'Este ítem ya está equipado.']);
+        }
+
         //Si ya tiene un objeto equipado, restar stats, devolver al inventario y borrar del equipment
         if ($equippedSlot) {
             $character->attack -= $equippedSlot->item->attack;
