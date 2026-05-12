@@ -9,6 +9,7 @@ export default function Sidebar() {
     let links = [
         { to: '/work', label: 'Trabajar', icon: '/img/icons/trabajar.png' },
         { to: '/inventory', label: 'Inventario', icon: '/img/icons/mercader.png' },
+        ...(user?.role === 'admin' ? [{ to: '/admin', label: 'Administración', icon: '/img/icons/clasificacion.png' }] : []),
     ]
 
     return (
