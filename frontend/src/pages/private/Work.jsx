@@ -211,6 +211,10 @@ export default function Work() {
                                             key={i}
                                             className="bg-dark border border-white/10 rounded-lg px-3 py-2 text-xs flex flex-col items-center gap-1 min-w-20"
                                         >
+                                            {item.image
+                                                ? <img src={item.image} alt={item.name} className="w-10 h-10 object-contain" />
+                                                : null
+                                            }
                                             <span className="text-primary font-bold">{item.name}</span>
                                             <span className={rarityColor(item.rarity)}>{item.rarity}</span>
                                         </div>
