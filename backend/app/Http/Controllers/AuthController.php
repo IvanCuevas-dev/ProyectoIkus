@@ -35,9 +35,10 @@ class AuthController extends Controller
             'user' => [
                 'id'   => $user->id,
                 'name' => $user->name,
+                'role' => $user->role,
             ],
             'token' => $token
-        ], 201);
+        ]);
     }
 
 
@@ -54,6 +55,11 @@ class AuthController extends Controller
         /** @var \App\Models\User $user */
         $user = Auth::user();
 
+        //Comprobar si el usuario está baneado
+        if ($user->banned) {
+            return response()->json(['message' => 'Tu cuenta ha sido suspendida.'], 403);
+        }
+
         //Generar token
         $token = $user->createToken('auth_token')->plainTextToken;
 
@@ -62,8 +68,9 @@ class AuthController extends Controller
             'user' => [
                 'id'   => $user->id,
                 'name' => $user->name,
+                'role' => $user->role,
             ],
             'token' => $token
-        ], 200);
+        ]);
     }
 }
