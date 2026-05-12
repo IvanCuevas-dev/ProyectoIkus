@@ -7,9 +7,11 @@ import Login from './pages/auth/Login'
 import Registro from './pages/auth/Registro'
 import { AuthProvider } from './context/AuthContext'
 import PrivateRoute from './components/PrivateRoute'
+import AdminRoute from './components/AdminRoute'
 import Work from './pages/private/Work'
 import Profile from './pages/private/Profile'
 import Inventory from './pages/private/Inventory'
+import Admin from './pages/private/Admin'
 
 function PublicLayout({ children }) {
     return (
@@ -94,6 +96,16 @@ export default function App() {
                                     <Profile />
                                 </PrivateLayout>
                             </PrivateRoute>
+                        }
+                    />
+                    <Route
+                        path="/admin"
+                        element={
+                            <AdminRoute>
+                                <PrivateLayout>
+                                    <Admin />
+                                </PrivateLayout>
+                            </AdminRoute>
                         }
                     />
                 </Routes>
