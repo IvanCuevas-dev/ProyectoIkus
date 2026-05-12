@@ -17,4 +17,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/inventory', [InventoryController::class, 'index']);
     Route::get('/equipment', [EquipmentController::class, 'index']);
     Route::post('/equipment/equip', [EquipmentController::class, 'equip']);
+    Route::delete('/equipment/unequip/{slot}', [EquipmentController::class, 'unequip']);
 });
