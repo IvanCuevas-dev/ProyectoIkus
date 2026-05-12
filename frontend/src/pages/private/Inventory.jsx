@@ -6,6 +6,7 @@ import ItemTooltip from '../../components/ItemTooltip'
 //Muestra el tooltip al tocar y equipa/desequipa al mantener
 function useLongPress(onLongPress) {
     let [touched, setTouched] = useState(false)
+    //useRef guarda el temporizador sin provocar re-renders
     let timer = useRef(null)
 
     function handleTouchStart() {
@@ -39,7 +40,7 @@ function StatCard({ label, value }) {
     )
 }
 
-//Slot de equipamiento: vacío muestra el nombre, ocupado muestra el item
+//Slot de equipamiento
 //Hover o toque muestra el tooltip, doble click o toque largo desequipa
 function SlotBox({ slot, equipped, onUnequip, characterLevel }) {
     let [hovered, setHovered] = useState(false)
@@ -48,6 +49,7 @@ function SlotBox({ slot, equipped, onUnequip, characterLevel }) {
     return (
         <div
             className="relative cursor-pointer w-20 h-20 bg-dark border border-white/10 rounded-lg flex flex-col items-center justify-center gap-1"
+            //Si está vacío no hace nada al hacer doble click
             onDoubleClick={() => equipped && onUnequip(slot)}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
@@ -66,7 +68,6 @@ function SlotBox({ slot, equipped, onUnequip, characterLevel }) {
                     <ItemTooltip item={equipped.item} visible={hovered || touched} characterLevel={characterLevel} />
                 </>
             ) : (
-                //Slot vacío: muestra el nombre del slot
                 <span className="text-muted text-xs text-center leading-tight px-1">{SLOT_LABELS[slot]}</span>
             )}
         </div>
@@ -93,6 +94,7 @@ function ItemCard({ entry, onEquip, characterLevel }) {
             ) : (
                 <span className="text-primary font-bold text-center leading-tight text-xs">{entry.item.name}</span>
             )}
+            {/*Cantidad del item en el inventario*/}
             <span className="text-muted text-xs">x{entry.quantity}</span>
             <ItemTooltip item={entry.item} visible={hovered || touched} characterLevel={characterLevel} />
         </div>
