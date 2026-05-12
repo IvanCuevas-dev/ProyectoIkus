@@ -17,7 +17,7 @@ export default function ItemTooltip({ item, visible }) {
     if (!visible) return null
 
     return (
-        <div className="absolute z-50 top-full left-1/2 -translate-x-1/2 mt-2 w-48 sm:w-56 lg:w-64 bg-dark border border-white/20 rounded-lg p-4 flex flex-col gap-2 shadow-xl shadow-black/60 pointer-events-none">
+        <div className="absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 sm:w-56 lg:w-64 bg-dark border border-white/20 rounded-lg p-4 flex flex-col gap-2 shadow-xl shadow-black/60 pointer-events-none">
             {/* Nombre + imagen */}
             <div className="flex items-center justify-between gap-2">
                 <span className={`font-bold text-base leading-tight ${RARITY_COLORS[item.rarity]}`}>{item.name}</span>
@@ -67,6 +67,7 @@ export default function ItemTooltip({ item, visible }) {
             {/* Rareza */}
             <div className="h-px bg-white/10" />
             <span className={`text-sm font-bold capitalize ${RARITY_COLORS[item.rarity]}`}>{item.rarity}</span>
+
         </div>
     )
 }
