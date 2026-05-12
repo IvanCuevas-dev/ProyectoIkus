@@ -13,7 +13,7 @@ let RARITY_BORDERS = {
 }
 
 //Tooltip
-export default function ItemTooltip({ item, visible }) {
+export default function ItemTooltip({ item, visible, characterLevel }) {
     if (!visible) return null
 
     return (
@@ -29,9 +29,11 @@ export default function ItemTooltip({ item, visible }) {
             </div>
 
             {/* Nivel y slot */}
-            <div className="flex items-center justify-between text-muted text-sm">
-                <span>Nivel {item.required_level}</span>
-                <span className="capitalize">{item.slot}</span>
+            <div className="flex items-center justify-between text-sm">
+                <span className={characterLevel < item.required_level ? 'text-red-400 font-bold' : 'text-muted'}>
+                    Nivel {item.required_level}
+                </span>
+                <span className="text-muted capitalize">{item.slot}</span>
             </div>
 
             {/* Separador */}
