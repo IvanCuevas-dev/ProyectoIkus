@@ -88,19 +88,20 @@ El servidor queda disponible en `http://localhost:5174`.
 
 IKUS/
 ├── backend/
-│ ├── app/
-│ │ ├── Http/Controllers/ # AuthController, WorkController, etc.
-│ │ ├── Http/Requests/ # RegisterRequest, LoginRequest
-│ │ └── Models/ # User, Character, Item, Inventory, Equipment
-│ ├── database/
-│ │ ├── migrations/
-│ │ └── seeders/
-│ └── routes/api.php # Definición de rutas de la API REST
+│   ├── app/
+│   │   ├── Http/Controllers/    # AuthController, WorkController, etc.
+│   │   ├── Http/Requests/       # RegisterRequest, LoginRequest
+│   │   └── Models/              # User, Character, Item, Inventory, Equipment
+│   ├── database/
+│   │   ├── migrations/
+│   │   └── seeders/
+│   └── routes/api.php           # Definición de rutas de la API REST
 └── frontend/
-└── src/
-├── components/ # Navbar, ItemTooltip, PrivateRoute, etc.
-├── context/ # AuthContext (gestión global de sesión)
-└── pages/ # Login, Register, Profile, Work, Inventory, Admin
+    └── src/
+        ├── components/          # Navbar, ItemTooltip, PrivateRoute, etc.
+        ├── context/             # AuthContext (gestión global de sesión)
+        ├── hooks/               # useLongPress (interacción táctil)
+        └── pages/               # Login, Register, Profile, Work, Inventory, Admin
 
 ## Autor
 
