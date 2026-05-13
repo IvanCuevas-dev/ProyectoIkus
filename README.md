@@ -1,16 +1,18 @@
 # IKUS
 
-Juego web de rol y estrategia con mecánicas de progresión basadas en el tiempo real. El jugador crea un personaje, lo envía a trabajar durante periodos predefinidos y obtiene experiencia, oro e ítems de forma proporcional al tiempo transcurrido.
+Juego web de rol y estrategia con mecánicas de progresión basadas en el tiempo real.
+El jugador crea un personaje, lo envía a trabajar durante periodos predefinidos y obtiene
+experiencia, oro e ítems de forma proporcional al tiempo transcurrido.
 
 ## Stack tecnológico
 
-| Capa          | Tecnología           |
-| ------------- | -------------------- |
-| Backend       | Laravel 12 + Sanctum |
-| Frontend      | React 19 + Vite      |
-| Estilos       | Tailwind CSS 4       |
-| HTTP client   | Axios                |
-| Base de datos | MySQL (XAMPP)        |
+| Capa | Tecnología |
+|---|---|
+| Backend | Laravel 12 + Sanctum |
+| Frontend | React 19 + Vite |
+| Estilos | Tailwind CSS 4 |
+| HTTP client | Axios |
+| Base de datos | MySQL (XAMPP) |
 
 ## Requisitos previos
 
@@ -30,21 +32,24 @@ cp .env.example .env
 php artisan key:generate
 ```
 
-Abre XAMPP y arranca el servicio MySQL. Luego crea la base de datos desde phpMyAdmin (http://localhost/phpmyadmin) o desde la terminal:
+Abre XAMPP y arranca el servicio **MySQL**. Luego crea la base de datos desde **phpMyAdmin** (`http://localhost/phpmyadmin`) o desde la terminal:
 
-```sql
+```bash
 mysql -u root -p
 CREATE DATABASE ikus;
 exit;
 ```
 
 Configura el archivo `.env` con tus credenciales:
+
+```env
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=ikus
 DB_USERNAME=root
 DB_PASSWORD=
+```
 
 Ejecuta las migraciones y los seeders:
 
@@ -69,10 +74,10 @@ El servidor queda disponible en `http://localhost:5174`.
 
 > Credenciales válidas únicamente en el entorno de desarrollo local.
 
-| Usuario | Email               | Contraseña  | Rol   |
-| ------- | ------------------- | ----------- | ----- |
-| Admin   | admin@admin.com     | admin1234   | admin |
-| Usuario | usuario@usuario.com | usuario1234 | user  |
+| Usuario | Email | Contraseña | Rol |
+|---|---|---|---|
+| Admin | admin@admin.com | admin1234 | admin |
+| Usuario | usuario@usuario.com | usuario1234 | user |
 
 ## Funcionalidades
 
@@ -86,6 +91,7 @@ El servidor queda disponible en `http://localhost:5174`.
 
 ## Estructura del proyecto
 
+```
 IKUS/
 ├── backend/
 │   ├── app/
@@ -102,7 +108,9 @@ IKUS/
         ├── context/             # AuthContext (gestión global de sesión)
         ├── hooks/               # useLongPress (interacción táctil)
         └── pages/               # Login, Register, Profile, Work, Inventory, Admin
+```
 
 ## Autor
 
 Iván Cuevas Salguero — TFG Desarrollo de Aplicaciones Web
+
