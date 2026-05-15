@@ -11,7 +11,7 @@ class AdminController extends Controller
     public function index(Request $request)
     {
         if ($request->user()->role !== 'admin') {
-            return response()->json(['message' => 'Acceso denegado.'], 403);
+            return response()->json(['message' => 'Acceso denegado.']);
         }
 
         $users = User::with('character')->get();
@@ -23,7 +23,7 @@ class AdminController extends Controller
     public function ban(Request $request, $id)
     {
         if ($request->user()->role !== 'admin') {
-            return response()->json(['message' => 'Acceso denegado.'], 403);
+            return response()->json(['message' => 'Acceso denegado.']);
         }
 
         $user = User::find($id);
@@ -49,7 +49,7 @@ class AdminController extends Controller
     public function unban(Request $request, $id)
     {
         if ($request->user()->role !== 'admin') {
-            return response()->json(['message' => 'Acceso denegado.'], 403);
+            return response()->json(['message' => 'Acceso denegado.']);
         }
 
         $user = User::find($id);
