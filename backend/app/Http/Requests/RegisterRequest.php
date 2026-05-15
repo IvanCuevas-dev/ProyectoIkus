@@ -16,8 +16,7 @@ class RegisterRequest extends FormRequest
     }
 
     /**
-     * Formatear datos antes de validar. 
-     * Pone siempre la primera en mayuscula y las demás minusculas
+     * Pone siempre la primera letra en mayuscula
      */
     protected function prepareForValidation(): void
     {
