@@ -44,7 +44,7 @@ class EquipmentController extends Controller
 
         //Comprobar que tiene nivel para usar el item
         if ($character->level < $item->required_level) {
-            return response()->json(["message" => "Nivel insuficiente para equipar este ítem."], 403);
+            return response()->json(["message" => "Nivel insuficiente para equipar este ítem."]);
         }
 
         //Buscar si ya tiene un item equipado en ese slot
