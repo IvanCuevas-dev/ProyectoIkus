@@ -1,25 +1,18 @@
-# ─── Claude ───────────────────────────────────────────────
-.claude/
-
-# ─── Variables de entorno / secretos ──────────────────────
 .env
 .env.*
 !.env.example
 *.key
 auth.json
 
-# ─── Dependencias ─────────────────────────────────────────
 node_modules/
 vendor/
 
-# ─── Builds ───────────────────────────────────────────────
 dist/
 dist-ssr/
 public/build/
 public/hot
 public/storage
 
-# ─── Logs ─────────────────────────────────────────────────
 *.log
 logs/
 npm-debug.log*
@@ -27,7 +20,6 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# ─── Caché y temporales ───────────────────────────────────
 .phpunit.result.cache
 .phpunit.cache/
 storage/pail/
@@ -35,7 +27,6 @@ storage/*.key
 bootstrap/cache/*.php
 *.local
 
-# ─── IDEs y editores ──────────────────────────────────────
 .vscode/
 .idea/
 .fleet/
@@ -47,11 +38,9 @@ bootstrap/cache/*.php
 *.sln
 *.sw?
 
-# ─── Sistema operativo ────────────────────────────────────
 .DS_Store
 Thumbs.db
 
-# ─── Laravel específico ───────────────────────────────────
 Homestead.json
 Homestead.yaml
 .phpactor.json
