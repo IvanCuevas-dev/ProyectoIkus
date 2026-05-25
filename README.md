@@ -17,13 +17,11 @@ experiencia, oro e ítems de forma proporcional al tiempo transcurrido.
 ## Stack tecnológico
 
 | Capa | Tecnología |
-
 |---|---|
 | Backend | Laravel 12 + Sanctum |
 | Frontend | React 19 + Vite |
-
 | Estilos | Tailwind CSS 4 |
-| HTTP client | Axios |
+| Cliente HTTP | Axios |
 | Base de datos | MySQL |
  
 ## Requisitos previos
