@@ -11,7 +11,6 @@ experiencia, oro e ítems de forma proporcional al tiempo transcurrido.
 <img width="1917" height="909" alt="Captura de pantalla 2026-05-15 124002" src="https://github.com/user-attachments/assets/f0ea5aac-b9fe-4c16-a4b1-ef786aab79db" />
 
 <img width="320" height="680" alt="Captura de pantalla 2026-05-15 112315" src="https://github.com/user-attachments/assets/bef8a907-77ed-442f-9dbe-34f16acd006b" />
-<img width="320" height="680" alt="Captura de pantalla 2026-05-15 115020" src="https://github.com/user-attachments/assets/cd0f2bea-0bb6-4920-b36b-4313f8f9d96d" />
 <img width="320" height="680" alt="Captura de pantalla 2026-05-15 125712" src="https://github.com/user-attachments/assets/228ae957-4db6-4afe-99ce-2efbc088bea2" />
  
 ## Stack tecnológico
