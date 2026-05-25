@@ -3,13 +3,25 @@
 Juego web de rol y estrategia con mecánicas de progresión basadas en el tiempo real.
 El jugador crea un personaje, lo envía a trabajar durante periodos predefinidos y obtiene
 experiencia, oro e ítems de forma proporcional al tiempo transcurrido.
+
+# Vista previa
+
+<img width="1573" height="1147" alt="Captura de pantalla 2026-05-15 100838" src="https://github.com/user-attachments/assets/bf577534-cd24-42e9-bc30-1ab150acf168" />
+<img width="1917" height="909" alt="Captura de pantalla 2026-05-15 111909" src="https://github.com/user-attachments/assets/46bc54be-cf93-4035-9321-bed70604aa19" />
+<img width="1912" height="906" alt="Captura de pantalla 2026-05-15 124002" src="https://github.com/user-attachments/assets/f0ea5aac-b9fe-4c16-a4b1-ef786aab79db" />
+
+<img width="389" height="843" alt="Captura de pantalla 2026-05-15 103809" src="https://github.com/user-attachments/assets/1744c0a3-75ad-460f-8e42-8b808d4df599" />
+<img width="386" height="812" alt="Captura de pantalla 2026-05-15 112315" src="https://github.com/user-attachments/assets/bef8a907-77ed-442f-9dbe-34f16acd006b" />
+<img width="377" height="818" alt="Captura de pantalla 2026-05-15 115020" src="https://github.com/user-attachments/assets/cd0f2bea-0bb6-4920-b36b-4313f8f9d96d" />
  
 ## Stack tecnológico
  
 | Capa | Tecnología |
+
 |---|---|
 | Backend | Laravel 12 + Sanctum |
 | Frontend | React 19 + Vite |
+
 | Estilos | Tailwind CSS 4 |
 | HTTP client | Axios |
 | Base de datos | MySQL |
